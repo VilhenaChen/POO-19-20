@@ -14,16 +14,18 @@ class DGV
 	vector <Piloto*> vetor_pilotos;
 
 public:
-	DGV():{}
+	DGV() {}
 
 	//add
 	void addCarro(int ener_atual, int ener_max, string brand, string model = "Moldelo Base");
 	void addPiloto(string nome, string personalidade = "Generico");
+
 	//erase
 
 	//find
 	char findNextID();
-	char findNextnamePiloto(string name);
+	string findNextnamePiloto(string name);
+
 	//check
 
 	virtual ~DGV() {}

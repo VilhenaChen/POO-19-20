@@ -28,7 +28,7 @@ char DGV::findNextID()
 	return '?';
 }
 
-char DGV::findNextnamePiloto(string name)
+string DGV::findNextnamePiloto(string name)
 {
 	bool nome_encon = false;
 	string test_name = name;
