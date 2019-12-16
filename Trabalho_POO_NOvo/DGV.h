@@ -14,7 +14,7 @@ class DGV
 	vector <Piloto*> vetor_pilotos;
 
 public:
-	DGV(): {}
+	DGV():{}
 
 	//add
 	void addCarro(int ener_atual, int ener_max, string brand, string model = "Moldelo Base");
@@ -22,7 +22,8 @@ public:
 	//erase
 
 	//find
-
+	char findNextID();
+	char findNextnamePiloto(string name);
 	//check
 
 	virtual ~DGV() {}

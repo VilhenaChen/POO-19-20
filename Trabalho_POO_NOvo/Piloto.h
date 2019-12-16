@@ -15,6 +15,9 @@ public:
 	
 	Piloto(string name, string person = "Generico" ) :nome(name), personalidade(person) {}
 
+	//get
+	string getNome();
+
 	virtual ~Piloto() {}
 };
 
