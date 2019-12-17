@@ -41,13 +41,17 @@ int main()
 				st_en_max = vet_var_comando[k];
 				k++;
 				marca = vet_var_comando[k];
-				if (k < vet_var_comando.size())
+				//cout << "k = " << k << " vet = " << vet_var_comando.size()  << endl;
+				if (k < (vet_var_comando.size()-1))
 				{
+					cout << "é menor" << endl;
 					modelo = vet_var_comando[k];
+					cout << "modelo"<<endl;
 					dgva.addCarro(stoi(st_en_at), stoi(st_en_max), marca, modelo);
 				}
 				else
 				{
+					cout << "nop" << endl;
 					dgva.addCarro(stoi(st_en_at), stoi(st_en_max), marca);
 				}
 			}
