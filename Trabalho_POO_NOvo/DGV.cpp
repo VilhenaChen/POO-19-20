@@ -1,9 +1,17 @@
 #include "DGV.h"
+#include <iostream>
+#include <string>
 
 void DGV::addCarro(int ener_atual, int ener_max, string brand, string model)
 {
 	char id = this->findNextID();
 	vetor_carros.push_back(new Carro(id, ener_atual, ener_max, brand, model));
+}
+
+void DGV::addPiloto(string nome, string personalidade)
+{
+	string novo_nome = this->findNextNamePiloto(nome);
+	vetor_pilotos.push_back(new Piloto(novo_nome));
 }
 
 char DGV::findNextID()
@@ -14,7 +22,7 @@ char DGV::findNextID()
 		letra_encon = false;
 		for (auto it = vetor_carros.begin(); it < vetor_carros.end(); it++)
 		{
-			if (char(i) == (*it)->getid_carro())
+			if (char(i) == (*it)->getId_carro())
 			{
 				letra_encon = true;
 				break;
@@ -28,7 +36,7 @@ char DGV::findNextID()
 	return '?';
 }
 
-string DGV::findNextnamePiloto(string name)
+string DGV::findNextNamePiloto(string name)
 {
 	bool nome_encon = false;
 	string test_name = name;
@@ -48,4 +56,26 @@ string DGV::findNextnamePiloto(string name)
 		}
 	} while (nome_encon == true);
 	return test_name;
+}
+
+string DGV::getAsString()
+{
+	ostringstream s;
+	cout << "Carros" << endl;
+	for (auto it = vetor_carros.begin(); it < vetor_carros.end(); it++)
+	{
+		s << "ID: " << (*it)->getId_carro() << " Marca: " << (*it)->getMarca() << " Modelo: " << (*it)->getModelo() << " Energia Maxima: " << (*it)->getEnergia_max() << " Velociade Maxima: " << (*it)->getVelocidade_max() << endl;
+	}
+	cout << "Pilotos" << endl;
+	for (auto it = vetor_pilotos.begin(); it < vetor_pilotos.end(); it++)
+	{
+		s << "Nome: " << (*it)->getNome() << " Personalidade: " << (*it)->getPersonalidade() << endl;
+	}
+	return s.str();
+}
+
+ostream& operator << (ostream& out, DGV& a)
+{
+	out << a.getAsString();
+	return out;
 }

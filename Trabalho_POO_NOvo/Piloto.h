@@ -17,6 +17,7 @@ public:
 
 	//get
 	string getNome();
+	string getPersonalidade();
 
 	virtual ~Piloto() {}
 };

@@ -24,9 +24,13 @@ public:
 
 	//find
 	char findNextID();
-	string findNextnamePiloto(string name);
+	string findNextNamePiloto(string name);
 
 	//check
 
+	string getAsString();
+
 	virtual ~DGV() {}
 };
+
+ostream& operator << (ostream& out, DGV& a);

@@ -3,7 +3,7 @@ class Menus
 {
 
 public:
-	Menus() : {}
+	Menus() {}
 	virtual ~Menus() {}
 };
 

@@ -12,7 +12,7 @@ class Autodromos
 	vector<Autodromo*> vetor_autodromos;
 
 public:
-	Autodromos() :{}
+	Autodromos() {}
 
 	virtual ~Autodromos() {}
 };

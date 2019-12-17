@@ -3,7 +3,7 @@ class Interface
 {
 
 public:
-	Interface() : {}
+	Interface() {}
 	virtual ~Interface() {}
 };
 

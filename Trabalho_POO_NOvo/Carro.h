@@ -21,7 +21,12 @@ public:
 	Carro(char idc, int ea, int em, string brand, string model = "Moldelo Base") : id_carro(idc), energia_atual(ea), energia_max(em), marca(brand), modelo(model) {}
 
 	//gets
-	char getid_carro();
+	string getMarca();
+	string getModelo();
+	char getId_carro();
+	int getEnergia_max();
+	int getEnergia_atual();
+	int getVelocidade_max();
 
 
 
