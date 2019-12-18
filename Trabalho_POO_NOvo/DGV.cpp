@@ -43,7 +43,10 @@ string DGV::findNextNamePiloto(string name)
 	int i = 0;
 	do
 	{
-		test_name = name + to_string(i);
+		if (i != 0)
+		{
+			test_name = name + to_string(i);
+		}
 		nome_encon = false;
 		for (auto it = vetor_pilotos.begin(); it < vetor_pilotos.end(); it++)
 		{
@@ -61,12 +64,12 @@ string DGV::findNextNamePiloto(string name)
 string DGV::getAsString()
 {
 	ostringstream s;
-	cout << "Carros" << endl;
+	s << "Carros" << endl;
 	for (auto it = vetor_carros.begin(); it < vetor_carros.end(); it++)
 	{
 		s << "ID: " << (*it)->getId_carro() << " Marca: " << (*it)->getMarca() << " Modelo: " << (*it)->getModelo() << " Energia Maxima: " << (*it)->getEnergia_max() << " Velociade Maxima: " << (*it)->getVelocidade_max() << endl;
 	}
-	cout << "Pilotos" << endl;
+	s << "Pilotos" << endl;
 	for (auto it = vetor_pilotos.begin(); it < vetor_pilotos.end(); it++)
 	{
 		s << "Nome: " << (*it)->getNome() << " Personalidade: " << (*it)->getPersonalidade() << endl;

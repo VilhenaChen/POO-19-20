@@ -2,15 +2,86 @@
 #include <string>
 #include <vector>
 #include "DGV.h"
+#include "Autodromos.h"
 
 using namespace std;
 
-vector<string> getTokens(string stri);
+//vector<string> getTokens(string stri);
 
 int main()
 {
-	string com, com_completo;
+	int op,en_at,en_max,resp, maxCar, comp;
+	string mar,mod, nome;
 	DGV dgva;
+	Autodromos autoa;
+	do
+	{
+		cout << "MENU" << endl;
+		cout << "1 - Inserir Piloto" << endl;
+		cout << "2 - Inserir Carro" << endl;
+		cout << "3 - Insira Autodromo" << endl;
+		cout << "4 - Listar" << endl;
+		cout << "Insira a opcao pretendida: " << endl;
+		cin >> op;
+		cin.ignore();
+		switch (op)
+		{
+			case 1:
+				cout << "Insira o nome do piloto" << endl;
+				getline(cin, nome);
+				dgva.addPiloto(nome);
+				break;
+			case 2:
+				cout << "Insira a energia atual do carro: " << endl;
+				cin >> en_at;
+				cin.ignore();
+				cout << "Insira a energia maxima do carro: " << endl;
+				cin >> en_max;
+				cin.ignore();
+				cout << "Insira a marca do carro: " << endl;
+				getline(cin, mar);
+				cout << "Inserir Modelo? (1=Sim 2=Nao): " << endl;
+				cin >> resp;
+				cin.ignore();
+				do
+				{
+					switch (resp)
+					{
+					case 1:
+						cout << "Insira o modelo: " << endl;
+						getline(cin, mod);
+						dgva.addCarro(en_at, en_max, mar, mod);
+						break;
+					case 2:
+						dgva.addCarro(en_at, en_max, mar);
+						break;
+					default:
+						cout << "OPÇÂO INVÁLIDA" << endl;
+					}
+				} while (resp != 1 && resp != 2);
+				break;
+			case 3:
+				cout << "Insira o Nome do Autodromo: " << endl;
+				getline(cin, nome);
+				cout << "Insira o Maximo dos carros: " << endl;
+				cin >> maxCar;
+				cin.ignore();
+				cout << "Insira o Comprimento do Autodromo: " << endl;
+				cin >> comp;
+				cin.ignore();
+				autoa.addAutodromo(nome, maxCar, comp);
+				break;
+			case 4:
+				cout << dgva << endl;
+				cout << autoa << endl;
+				break;
+			default:
+				cout << "OPCAO INVALIDA" << endl;
+		}
+	} while (op != 5);
+
+	/*
+	string com, com_completo;
 	do
 	{
 		com.clear();
@@ -75,6 +146,7 @@ int main()
 			}
 		}
 	} while (com != "end");
+	*/
 	return 0;
 }
 

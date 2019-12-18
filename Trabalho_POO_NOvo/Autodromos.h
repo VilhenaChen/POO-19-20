@@ -14,6 +14,14 @@ class Autodromos
 public:
 	Autodromos() {}
 
+	//add
+	void addAutodromo(string nome, int max, int comp);
+
+
+	string getAsString();
+
 	virtual ~Autodromos() {}
 };
+
+ostream& operator << (ostream& out, Autodromos& a);
 
