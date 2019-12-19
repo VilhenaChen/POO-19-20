@@ -22,6 +22,9 @@ int main()
 		cout << "2 - Inserir Carro" << endl;
 		cout << "3 - Insira Autodromo" << endl;
 		cout << "4 - Listar" << endl;
+		cout << "5 - Ler Autodromos de ficheiro";
+		cout << "6 - Ler Pilotos de ficheiro";
+		cout << "7 - Ler Carros de ficheiro";
 		cout << "Insira a opcao pretendida: " << endl;
 		cin >> op;
 		cin.ignore();
@@ -70,16 +73,24 @@ int main()
 				cout << "Insira o Comprimento do Autodromo: " << endl;
 				cin >> comp;
 				cin.ignore();
-				autoa.addAutodromo(nome, maxCar, comp);
+				autoa.addAutodromo(maxCar, comp, nome);
 				break;
 			case 4:
 				cout << dgva << endl;
 				cout << autoa << endl;
 				break;
+			case 5:
+				bool verifica;
+				verifica = autoa.leFicheiroAutodromos("Autodromos.txt");
+				break;
+			case 6:
+				break;
+			case 7:
+				break;
 			default:
 				cout << "OPCAO INVALIDA" << endl;
 		}
-	} while (op != 5);
+	} while (op != 8);
 
 	/*
 	string com, com_completo;
@@ -154,7 +165,7 @@ int main()
 	*/
 	return 0;
 }
-
+/*
 vector<string> getTokens(string stri)
 {
 	istringstream iss(stri);
@@ -163,3 +174,4 @@ vector<string> getTokens(string stri)
 		resultado.push_back(aux);
 	return resultado;
 }
+*/

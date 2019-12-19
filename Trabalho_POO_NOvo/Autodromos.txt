@@ -1,0 +1,4 @@
+5 20 Twister
+8 30 Fly
+2 15 Flash
+6 25 Speed

@@ -15,7 +15,13 @@ public:
 	Autodromos() {}
 
 	//add
-	void addAutodromo(string nome, int max, int comp);
+	void addAutodromo(int max, int comp, string nome);
+
+	//read from file
+	bool leFicheiroAutodromos(string nome_ficheiro);
+
+	//getTokens
+
 
 
 	string getAsString();
