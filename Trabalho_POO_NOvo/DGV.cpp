@@ -61,6 +61,61 @@ string DGV::findNextNamePiloto(string name)
 	return test_name;
 }
 
+bool DGV::leFicheiroCarros(string nome_ficheiro)
+{
+	ifstream f(nome_ficheiro);
+	string linha, marc;
+	string espaco = " ";
+	string en_at, en_max;
+	string mod, aux;
+	if (f.is_open()) {
+		while (getline(f, linha))
+		{
+			mod.clear();
+			istringstream iss(linha);
+			iss >> en_at;
+			iss >> en_max;
+			iss >> marc;
+			iss >> mod;
+			while (iss >> aux)
+			{
+				mod = mod + espaco;
+				mod = mod + aux;
+			}
+			this->addCarro(stoi(en_at), stoi(en_max), marc, mod);
+		}
+		f.close();
+		return true;
+	}
+	return false;
+}
+
+bool DGV::leFicheiroPilotos(string nome_ficheiro)
+{
+	ifstream f(nome_ficheiro);
+	string linha;
+	string espaco = " ";
+	string nome, aux, lixo;
+	if (f.is_open()) {
+		while (getline(f, linha))
+		{
+			nome.clear();
+			istringstream iss(linha);
+			iss >> lixo;
+			iss >> nome;
+			while (iss >> aux)
+			{
+				nome = nome + espaco;
+				nome = nome + aux;
+			}
+			this->addPiloto(nome);
+		}
+		f.close();
+		return true;
+	}
+	return false;
+}
+
 string DGV::getAsString()
 {
 	ostringstream s;

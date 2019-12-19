@@ -18,7 +18,7 @@ class Carro
 	Piloto* piloto_par = nullptr;
 
 public:
-	Carro(char idc, int ea, int em, string brand, string model) : id_carro(idc), energia_atual(ea), energia_max(em), marca(brand){}
+	Carro(char idc, int ea, int em, string brand, string model) : id_carro(idc), energia_atual(ea), energia_max(em), marca(brand), modelo(model){}
 
 	//gets
 	string getMarca();

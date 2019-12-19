@@ -23,8 +23,8 @@ int main()
 		cout << "3 - Insira Autodromo" << endl;
 		cout << "4 - Listar" << endl;
 		cout << "5 - Ler Autodromos de ficheiro" << endl;
-		cout << "6 - Ler Pilotos de ficheiro" << endl;
-		cout << "7 - Ler Carros de ficheiro" << endl;
+		cout << "6 - Ler Carros de ficheiro" << endl;
+		cout << "7 - Ler Pilotos de ficheiro" << endl;
 		cout << "Insira a opcao pretendida: " << endl;
 		cin >> op;
 		cin.ignore();
@@ -80,12 +80,28 @@ int main()
 				cout << autoa << endl;
 				break;
 			case 5:
-				bool verifica;
-				verifica = autoa.leFicheiroAutodromos("Autodromos.txt");
+				bool verifica_au;
+				verifica_au = autoa.leFicheiroAutodromos("Autodromos.txt");
+				if (verifica_au == false)
+				{
+					cout << "O Ficheiro nao pode ser aberto!" << endl;
+				}
 				break;
 			case 6:
+				bool verifica_car;
+				verifica_car = dgva.leFicheiroCarros("Carros.txt");
+				if (verifica_car == false)
+				{
+					cout << "O Ficheiro nao pode ser aberto!" << endl;
+				}
 				break;
 			case 7:
+				bool verifica_pil;
+				verifica_pil = dgva.leFicheiroPilotos("Pilotos.txt");
+				if (verifica_pil == false)
+				{
+					cout << "O Ficheiro nao pode ser aberto!" << endl;
+				}
 				break;
 			default:
 				cout << "OPCAO INVALIDA" << endl;

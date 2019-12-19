@@ -17,7 +17,7 @@ public:
 	DGV() {}
 
 	//add
-	void addCarro(int ener_atual, int ener_max, string brand, string model = "Moldelo Base");
+	void addCarro(int ener_atual, int ener_max, string brand, string model="Modelo Base");
 	void addPiloto(string nome, string personalidade = "Generico");
 
 	//erase
@@ -27,6 +27,10 @@ public:
 	string findNextNamePiloto(string name);
 
 	//check
+
+	//read from file
+	bool leFicheiroCarros(string nome_ficheiro);
+	bool leFicheiroPilotos(string nome_ficheiro);
 
 	string getAsString();
 

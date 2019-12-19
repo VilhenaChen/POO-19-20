@@ -17,9 +17,11 @@ bool Autodromos::leFicheiroAutodromos(string nome_ficheiro)
 	if (f.is_open()) {
 		while (getline(f, linha))
 		{
+			nome.clear();
 			istringstream iss(linha);
 			iss >> num_car;
 			iss >> com;
+			iss >> nome;
 			while (iss >> aux) 
 			{
 				nome = nome + espaco;
