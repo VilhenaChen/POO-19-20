@@ -22,9 +22,9 @@ int main()
 		cout << "2 - Inserir Carro" << endl;
 		cout << "3 - Insira Autodromo" << endl;
 		cout << "4 - Listar" << endl;
-		cout << "5 - Ler Autodromos de ficheiro";
-		cout << "6 - Ler Pilotos de ficheiro";
-		cout << "7 - Ler Carros de ficheiro";
+		cout << "5 - Ler Autodromos de ficheiro" << endl;
+		cout << "6 - Ler Pilotos de ficheiro" << endl;
+		cout << "7 - Ler Carros de ficheiro" << endl;
 		cout << "Insira a opcao pretendida: " << endl;
 		cin >> op;
 		cin.ignore();
