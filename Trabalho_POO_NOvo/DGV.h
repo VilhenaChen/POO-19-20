@@ -32,6 +32,9 @@ public:
 	bool leFicheiroCarros(string nome_ficheiro);
 	bool leFicheiroPilotos(string nome_ficheiro);
 
+	//enter the car
+	void entraNoCarro(char let_car, string name_pil);
+
 	string getAsString();
 
 	virtual ~DGV() {}

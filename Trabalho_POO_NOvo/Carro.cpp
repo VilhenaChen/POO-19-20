@@ -29,3 +29,13 @@ int Carro::getVelocidade_max()
 {
 	return velocidade_max;
 }
+
+Piloto* Carro::getPilotoPar()
+{
+	return piloto_par;
+}
+
+void Carro::setPilotoPar(Piloto* pil_par)
+{
+	piloto_par = pil_par;
+}

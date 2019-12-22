@@ -27,6 +27,10 @@ public:
 	int getEnergia_max();
 	int getEnergia_atual();
 	int getVelocidade_max();
+	Piloto* getPilotoPar();
+
+	//sets
+	void setPilotoPar(Piloto* pil_par);
 
 
 

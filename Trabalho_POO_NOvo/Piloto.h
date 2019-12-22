@@ -18,6 +18,10 @@ public:
 	//get
 	string getNome();
 	string getPersonalidade();
+	Carro* getCarroPar();
+
+	//sets
+	void setCarroPar(Carro* car_par);
 
 	virtual ~Piloto() {}
 };

@@ -11,8 +11,10 @@ using namespace std;
 
 int main()
 {
-	int op,en_at,en_max,resp, maxCar, comp;
+	int op=0,en_at,en_max,resp, maxCar, comp;
 	string mar,mod, nome;
+	char letr_carro;
+	string nom_piloto, str_letr_carro;
 	DGV dgva;
 	Autodromos autoa;
 	do
@@ -25,6 +27,7 @@ int main()
 		cout << "5 - Ler Autodromos de ficheiro" << endl;
 		cout << "6 - Ler Carros de ficheiro" << endl;
 		cout << "7 - Ler Pilotos de ficheiro" << endl;
+		cout << "8 - Fazer piloto entrar num carro" << endl;
 		cout << "Insira a opcao pretendida: " << endl;
 		cin >> op;
 		cin.ignore();
@@ -103,10 +106,18 @@ int main()
 					cout << "O Ficheiro nao pode ser aberto!" << endl;
 				}
 				break;
+			case 8:
+				cout << "Insira o id do carro: " << endl;
+				getline(cin, str_letr_carro);
+				cout << "Insira o nome do piloto: " << endl;
+				getline(cin,nom_piloto);
+				letr_carro = str_letr_carro[0];
+				dgva.entraNoCarro(letr_carro,nom_piloto);
+				break;
 			default:
 				cout << "OPCAO INVALIDA" << endl;
 		}
-	} while (op != 8);
+	} while (op != 9);
 
 	/*
 	string com, com_completo;

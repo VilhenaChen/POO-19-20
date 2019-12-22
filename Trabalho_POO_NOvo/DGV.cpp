@@ -116,18 +116,69 @@ bool DGV::leFicheiroPilotos(string nome_ficheiro)
 	return false;
 }
 
+
+void DGV::entraNoCarro(char let_car, string name_pil)
+{
+	
+	for (auto ita = vetor_carros.begin(); ita < vetor_carros.end(); ita++)
+	{
+		if ((*ita)->getId_carro() == let_car)
+		{
+			for (auto itb = vetor_pilotos.begin(); itb < vetor_pilotos.end(); itb++)
+			{
+				if ((*itb)->getNome() == name_pil)
+				{
+					if ((*ita)->getPilotoPar()== nullptr)
+					{
+						if ((*itb)->getCarroPar()== nullptr) 
+						{
+							(*ita)->setPilotoPar(*itb);
+							(*itb)->setCarroPar(*ita);
+							cout << "O piloto" << (*ita)->getPilotoPar()->getNome() << "foi inserido no carro: " << (*itb)->getCarroPar()->getId_carro() << endl;
+						}
+						else
+						{
+							cout << "O piloto escolhido já se encontra no carro: " << (*itb)->getCarroPar()->getId_carro() << endl;
+						}
+					}
+					else 
+					{
+						if ((*itb)->getCarroPar() != nullptr)
+						{
+							cout << "O piloto escolhido já se encontra no carro: " << (*itb)->getCarroPar()->getId_carro() << " e o carro escolhido já tem sentado o piloto: " << (*ita)->getPilotoPar()->getNome() << endl;
+						}
+						else
+						{
+							cout << "O carro escolhido já tem sentado o piloto: " << (*ita)->getPilotoPar()->getNome() << endl;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
+
 string DGV::getAsString()
 {
 	ostringstream s;
 	s << "Carros" << endl;
 	for (auto it = vetor_carros.begin(); it < vetor_carros.end(); it++)
 	{
-		s << "ID: " << (*it)->getId_carro() << " Marca: " << (*it)->getMarca() << " Modelo: " << (*it)->getModelo() << " Energia Maxima: " << (*it)->getEnergia_max() << " Velociade Maxima: " << (*it)->getVelocidade_max() << endl;
+		s << "ID: " << (*it)->getId_carro() << " Marca: " << (*it)->getMarca() << " Modelo: " << (*it)->getModelo() << " Energia Maxima: " << (*it)->getEnergia_max() << " Velociade Maxima: " << (*it)->getVelocidade_max();
+		if ((*it)->getPilotoPar() != nullptr)
+			s << " Contem o piloto: " << (*it)->getPilotoPar()->getNome() << endl;
+		else
+			s << endl;
 	}
 	s << "Pilotos" << endl;
 	for (auto it = vetor_pilotos.begin(); it < vetor_pilotos.end(); it++)
 	{
-		s << "Nome: " << (*it)->getNome() << " Personalidade: " << (*it)->getPersonalidade() << endl;
+		s << "Nome: " << (*it)->getNome() << " Personalidade: " << (*it)->getPersonalidade();
+		if ((*it)->getCarroPar() != nullptr)
+			s << " Está no carro: " << (*it)->getCarroPar()->getId_carro() << endl;
+		else
+			s << endl;
 	}
 	return s.str();
 }
