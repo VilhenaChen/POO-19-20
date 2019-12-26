@@ -35,6 +35,21 @@ bool Autodromos::leFicheiroAutodromos(string nome_ficheiro)
 	return false;
 }
 
+void Autodromos::apagaAutodromo(string name_aut)
+{
+	for (auto it = vetor_autodromos.begin(); it < vetor_autodromos.end(); it++)
+	{
+		if (name_aut == (*it)->getNome())
+		{
+			delete* it;
+			vetor_autodromos.erase(it);
+			cout << "O carro " << name_aut << " foi apagado" << endl;
+			return;
+		}
+	}
+	cout << "O autodromo " << name_aut << " não existe" << endl;
+}
+
 string Autodromos::getAsString()
 {
 	ostringstream s;

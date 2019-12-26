@@ -159,6 +159,68 @@ void DGV::entraNoCarro(char let_car, string name_pil)
 	
 }
 
+void DGV::saiDoCarro(char let_car)
+{
+	string pil_nam;
+	for (auto it = vetor_carros.begin(); it < vetor_carros.end(); it++) 
+	{
+		if ((*it)->getId_carro() == let_car)
+		{
+			if ((*it)->getPilotoPar()!=nullptr)
+			{
+				(*it)->getPilotoPar()->setCarroPar(nullptr);
+				pil_nam = (*it)->getPilotoPar()->getNome();
+				(*it)->setPilotoPar(nullptr);
+				cout << "O piloto " << pil_nam << " saiu do carro " << let_car << endl;
+				return;
+			}
+			else 
+			{
+				cout << "O carro " << let_car << " esta vazio" << endl;
+			}
+		}
+	}
+	cout << "O carro " << let_car << " não existe" << endl;
+}
+
+void DGV::apagaCarro(char let_car)
+{
+	for (auto it = vetor_carros.begin(); it < vetor_carros.end(); it++)
+	{
+		if (let_car == (*it)->getId_carro())
+		{
+			if ((*it)->getPilotoPar()!= nullptr)
+			{
+				(*it)->getPilotoPar()->setCarroPar(nullptr);
+			}
+			delete* it;
+			vetor_carros.erase(it);
+			cout << "O carro " << let_car << " foi apagado" << endl;
+			return;
+		}
+	}
+	cout << "O carro " << let_car <<" não existe" << endl;
+}
+
+void DGV::apagaPiloto(string name_pil)
+{
+	for (auto it = vetor_pilotos.begin(); it < vetor_pilotos.end(); it++)
+	{
+		if (name_pil == (*it)->getNome())
+		{
+			if ((*it)->getCarroPar() != nullptr)
+			{
+				(*it)->getCarroPar()->setPilotoPar(nullptr);
+			}
+			delete* it;
+			vetor_pilotos.erase(it);
+			cout << "O piloto " << name_pil << " foi apagado" << endl;
+			return;
+		}
+	}
+	cout << "O piloto " << name_pil << " não existe" << endl;
+}
+
 string DGV::getAsString()
 {
 	ostringstream s;

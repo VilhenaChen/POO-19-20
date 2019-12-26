@@ -12,8 +12,6 @@ class Autodromos
 	vector<Autodromo*> vetor_autodromos;
 
 public:
-	Autodromos() {}
-
 	//add
 	void addAutodromo(int max, int comp, string nome);
 
@@ -22,11 +20,17 @@ public:
 
 	//getTokens
 
+	//erase
+	void apagaAutodromo(string name_aut);
 
 
 	string getAsString();
 
-	virtual ~Autodromos() {}
+	virtual ~Autodromos() 
+	{
+		for (int i = 0; i < vetor_autodromos.size(); i++)
+			delete vetor_autodromos[i];
+	}
 };
 
 ostream& operator << (ostream& out, Autodromos& a);

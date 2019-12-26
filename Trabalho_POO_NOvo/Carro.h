@@ -34,6 +34,8 @@ public:
 
 
 
-	virtual ~Carro() {}
+	virtual ~Carro() 
+	{
+	}
 };
 

@@ -23,6 +23,8 @@ public:
 	//sets
 	void setCarroPar(Carro* car_par);
 
-	virtual ~Piloto() {}
+	virtual ~Piloto() 
+	{
+	}
 };
 

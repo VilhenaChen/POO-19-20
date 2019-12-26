@@ -14,7 +14,7 @@ int main()
 	int op=0,en_at,en_max,resp, maxCar, comp;
 	string mar,mod, nome;
 	char letr_carro;
-	string nom_piloto, str_letr_carro;
+	string nom_piloto, str_letr_carro, nom_autodromo;
 	DGV dgva;
 	Autodromos autoa;
 	do
@@ -28,6 +28,10 @@ int main()
 		cout << "6 - Ler Carros de ficheiro" << endl;
 		cout << "7 - Ler Pilotos de ficheiro" << endl;
 		cout << "8 - Fazer piloto entrar num carro" << endl;
+		cout << "9 - Fazer piloto sair de um carro" << endl;
+		cout << "10 - Elimina carro" << endl;
+		cout << "11 - Elimina piloto" << endl;;
+		cout << "12 - Elimina autodromo"<< endl;
 		cout << "Insira a opcao pretendida: " << endl;
 		cin >> op;
 		cin.ignore();
@@ -114,10 +118,32 @@ int main()
 				letr_carro = str_letr_carro[0];
 				dgva.entraNoCarro(letr_carro,nom_piloto);
 				break;
+			case 9:
+				cout << "Insira o id do carro" << endl;
+				getline(cin, str_letr_carro);
+				letr_carro = str_letr_carro[0];
+				dgva.saiDoCarro(letr_carro);
+				break;
+			case 10:
+				cout << "Insira o id do carro: " << endl;
+				getline(cin, str_letr_carro);
+				letr_carro = str_letr_carro[0];
+				dgva.apagaCarro(letr_carro);
+				break;
+			case 11:
+				cout << "Insira o nome do piloto: " << endl;
+				getline(cin, nom_piloto);
+				dgva.apagaPiloto(nom_piloto);
+				break;
+			case 12:
+				cout << "Insira o nome do autodromo: " << endl;
+				getline(cin, nom_autodromo);
+				autoa.apagaAutodromo(nom_autodromo);
+				break;
 			default:
 				cout << "OPCAO INVALIDA" << endl;
 		}
-	} while (op != 9);
+	} while (op != 13);
 
 	/*
 	string com, com_completo;
