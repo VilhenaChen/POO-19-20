@@ -28,11 +28,11 @@ public:
 	int getEnergia_atual();
 	int getVelocidade_max();
 	Piloto* getPilotoPar();
+	int getTempo();
 
 	//sets
 	void setPilotoPar(Piloto* pil_par);
-
-
+	void setTempo(int segundos):
 
 	virtual ~Carro() 
 	{

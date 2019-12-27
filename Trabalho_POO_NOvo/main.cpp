@@ -3,6 +3,7 @@
 #include <vector>
 #include "DGV.h"
 #include "Autodromos.h"
+#include "Interface.h"
 
 using namespace std;
 
@@ -11,8 +12,10 @@ using namespace std;
 
 int main()
 {
-	int op=0,en_at,en_max,resp, maxCar, comp;
-	string mar,mod, nome;
+	Interface intera; ??
+
+	/*int op = 0, en_at, en_max, resp, maxCar, comp;
+	string mar, mod, nome;
 	char letr_carro;
 	string nom_piloto, str_letr_carro, nom_autodromo;
 	DGV dgva;
@@ -31,200 +34,119 @@ int main()
 		cout << "9 - Fazer piloto sair de um carro" << endl;
 		cout << "10 - Elimina carro" << endl;
 		cout << "11 - Elimina piloto" << endl;;
-		cout << "12 - Elimina autodromo"<< endl;
+		cout << "12 - Elimina autodromo" << endl;
 		cout << "Insira a opcao pretendida: " << endl;
 		cin >> op;
 		cin.ignore();
 		switch (op)
 		{
-			case 1:
-				cout << "Insira o nome do piloto" << endl;
-				getline(cin, nome);
-				dgva.addPiloto(nome);
-				break;
-			case 2:
-				cout << "Insira a energia atual do carro: " << endl;
-				cin >> en_at;
-				cin.ignore();
-				cout << "Insira a energia maxima do carro: " << endl;
-				cin >> en_max;
-				cin.ignore();
-				cout << "Insira a marca do carro: " << endl;
-				getline(cin, mar);
-				cout << "Inserir Modelo? (1=Sim 2=Nao): " << endl;
-				cin >> resp;
-				cin.ignore();
-				do
+		case 1:
+			cout << "Insira o nome do piloto" << endl;
+			getline(cin, nome);
+			dgva.addPiloto(nome);
+			break;
+		case 2:
+			cout << "Insira a energia atual do carro: " << endl;
+			cin >> en_at;
+			cin.ignore();
+			cout << "Insira a energia maxima do carro: " << endl;
+			cin >> en_max;
+			cin.ignore();
+			cout << "Insira a marca do carro: " << endl;
+			getline(cin, mar);
+			cout << "Inserir Modelo? (1=Sim 2=Nao): " << endl;
+			cin >> resp;
+			cin.ignore();
+			do
+			{
+				switch (resp)
 				{
-					switch (resp)
-					{
-					case 1:
-						cout << "Insira o modelo: " << endl;
-						getline(cin, mod);
-						dgva.addCarro(en_at, en_max, mar, mod);
-						break;
-					case 2:
-						dgva.addCarro(en_at, en_max, mar);
-						break;
-					default:
-						cout << "OPÇÂO INVÁLIDA" << endl;
-					}
-				} while (resp != 1 && resp != 2);
-				break;
-			case 3:
-				cout << "Insira o Nome do Autodromo: " << endl;
-				getline(cin, nome);
-				cout << "Insira o Maximo dos carros: " << endl;
-				cin >> maxCar;
-				cin.ignore();
-				cout << "Insira o Comprimento do Autodromo: " << endl;
-				cin >> comp;
-				cin.ignore();
-				autoa.addAutodromo(maxCar, comp, nome);
-				break;
-			case 4:
-				cout << dgva << endl;
-				cout << autoa << endl;
-				break;
-			case 5:
-				bool verifica_au;
-				verifica_au = autoa.leFicheiroAutodromos("Autodromos.txt");
-				if (verifica_au == false)
-				{
-					cout << "O Ficheiro nao pode ser aberto!" << endl;
+				case 1:
+					cout << "Insira o modelo: " << endl;
+					getline(cin, mod);
+					dgva.addCarro(en_at, en_max, mar, mod);
+					break;
+				case 2:
+					dgva.addCarro(en_at, en_max, mar);
+					break;
+				default:
+					cout << "OPÇÂO INVÁLIDA" << endl;
 				}
-				break;
-			case 6:
-				bool verifica_car;
-				verifica_car = dgva.leFicheiroCarros("Carros.txt");
-				if (verifica_car == false)
-				{
-					cout << "O Ficheiro nao pode ser aberto!" << endl;
-				}
-				break;
-			case 7:
-				bool verifica_pil;
-				verifica_pil = dgva.leFicheiroPilotos("Pilotos.txt");
-				if (verifica_pil == false)
-				{
-					cout << "O Ficheiro nao pode ser aberto!" << endl;
-				}
-				break;
-			case 8:
-				cout << "Insira o id do carro: " << endl;
-				getline(cin, str_letr_carro);
-				cout << "Insira o nome do piloto: " << endl;
-				getline(cin,nom_piloto);
-				letr_carro = str_letr_carro[0];
-				dgva.entraNoCarro(letr_carro,nom_piloto);
-				break;
-			case 9:
-				cout << "Insira o id do carro" << endl;
-				getline(cin, str_letr_carro);
-				letr_carro = str_letr_carro[0];
-				dgva.saiDoCarro(letr_carro);
-				break;
-			case 10:
-				cout << "Insira o id do carro: " << endl;
-				getline(cin, str_letr_carro);
-				letr_carro = str_letr_carro[0];
-				dgva.apagaCarro(letr_carro);
-				break;
-			case 11:
-				cout << "Insira o nome do piloto: " << endl;
-				getline(cin, nom_piloto);
-				dgva.apagaPiloto(nom_piloto);
-				break;
-			case 12:
-				cout << "Insira o nome do autodromo: " << endl;
-				getline(cin, nom_autodromo);
-				autoa.apagaAutodromo(nom_autodromo);
-				break;
-			default:
-				cout << "OPCAO INVALIDA" << endl;
-		}
-	} while (op != 13);
+			} while (resp != 1 && resp != 2);
+			break;
+		case 3:
+			cout << "Insira o Nome do Autodromo: " << endl;
+			getline(cin, nome);
+			cout << "Insira o Maximo dos carros: " << endl;
+			cin >> maxCar;
+			cin.ignore();
+			cout << "Insira o Comprimento do Autodromo: " << endl;
+			cin >> comp;
+			cin.ignore();
+			autoa.addAutodromo(maxCar, comp, nome);
+			break;
+		case 4:
+			cout << dgva << endl;
+			cout << autoa << endl;
+			break;
+		case 5:
+			bool verifica_au;
+			verifica_au = autoa.leFicheiroAutodromos("Autodromos.txt");
+			if (verifica_au == false)
+			{
+				cout << "O Ficheiro nao pode ser aberto!" << endl;
+			}
+			break;
+		case 6:
+			bool verifica_car;
+			verifica_car = dgva.leFicheiroCarros("Carros.txt");
+			if (verifica_car == false)
+			{
+				cout << "O Ficheiro nao pode ser aberto!" << endl;
+			}
+			break;
+		case 7:
+			bool verifica_pil;
+			verifica_pil = dgva.leFicheiroPilotos("Pilotos.txt");
+			if (verifica_pil == false)
+			{
+				cout << "O Ficheiro nao pode ser aberto!" << endl;
+			}
+			break;
+		case 8:
+			cout << "Insira o id do carro: " << endl;
+			getline(cin, str_letr_carro);
+			cout << "Insira o nome do piloto: " << endl;
+			getline(cin, nom_piloto);
+			letr_carro = str_letr_carro[0];
+			dgva.entraNoCarro(letr_carro, nom_piloto);
+			break;
+		case 9:
+			cout << "Insira o id do carro" << endl;
+			getline(cin, str_letr_carro);
+			letr_carro = str_letr_carro[0];
+			dgva.saiDoCarro(letr_carro);
+			break;
+		case 10:
+			cout << "Insira o id do carro: " << endl;
+			getline(cin, str_letr_carro);
+			letr_carro = str_letr_carro[0];
+			dgva.apagaCarro(letr_carro);
+			break;
+		case 11:
+			cout << "Insira o nome do piloto: " << endl;
+			getline(cin, nom_piloto);
+			dgva.apagaPiloto(nom_piloto);
+			break;
+		case 12:
 
-	/*
-	string com, com_completo;
-	do
-	{
-		com.clear();
-		cout << "COMANDOS" << endl;
-		cout << endl;
-		cout << "carregaP <nomeFicheiro>" << endl;
-		cout << "carregaC <nomeFicheiro>" << endl;
-		cout << "carregaA <nomeFicheiro>" << endl;
-		cout << "cria <letraTipo> <dados do objeto>" << endl;
-		cout << "lista" << endl;
-		cout << "Insira um comando: ";
-		getline(cin, com_completo);
-		vector <string> vet_var_comando;
-		vet_var_comando = getTokens(com_completo);
-		unsigned int k = 0;
-		com = vet_var_comando[k];
-		k++;
-		if (com == "cria" && k < vet_var_comando.size())
-		{
-			string tipo;
-			tipo = vet_var_comando[k];
-			k++;
-			if (tipo == "c")
-			{
-				string marca, modelo, st_en_at, st_en_max;
-				st_en_at = vet_var_comando[k];
-				k++;
-				st_en_max = vet_var_comando[k];
-				k++;
-				marca = vet_var_comando[k];
-				//cout << "k = " << k << " vet = " << vet_var_comando.size()  << endl;
-				if (k < (vet_var_comando.size()-1))
-				{
-					cout << "é menor" << endl;
-					modelo = vet_var_comando[k];
-					cout << "modelo"<<endl;
-					dgva.addCarro(stoi(st_en_at), stoi(st_en_max), marca, modelo);
-				}
-				else
-				{
-					cout << "nop" << endl;
-					dgva.addCarro(stoi(st_en_at), stoi(st_en_max), marca);
-				}
-			}
-			else
-			{
-				if (tipo == "p")
-				{
-					string tipo_pil, nome_pil;
-					nome_pil.clear();
-					tipo_pil = vet_var_comando[k];
-					k++;
-					for (unsigned int i = k; i < vet_var_comando.size(); i++)
-					{
-						nome_pil = nome_pil + vet_var_comando[i];
-					}
-					dgva.addPiloto(nome_pil);
-				}
-			}
+			cout << "Insira o nome do autodromo: " << endl;
+			getline(cin, nom_autodromo);
+			autoa.apagaAutodromo(nom_autodromo);
+			break;
+		default:
+			cout << "OPCAO INVALIDA" << endl;
 		}
-		else
-		{
-			if (com == "lista")
-			{
-				cout << dgva << endl;
-			}
-		}
-	} while (com != "end");
-	*/
+	} while (op != 13);*/
 	return 0;
 }
-/*
-vector<string> getTokens(string stri)
-{
-	istringstream iss(stri);
-	vector<string> resultado;
-	for (string aux; iss >> aux;)
-		resultado.push_back(aux);
-	return resultado;
-}
-*/

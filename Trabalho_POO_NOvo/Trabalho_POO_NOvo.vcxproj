@@ -156,7 +156,6 @@
     <ClCompile Include="Carro.cpp" />
     <ClCompile Include="DGV.cpp" />
     <ClCompile Include="Interface.cpp" />
-    <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Piloto.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -166,7 +165,6 @@
     <ClInclude Include="Carro.h" />
     <ClInclude Include="DGV.h" />
     <ClInclude Include="Interface.h" />
-    <ClInclude Include="Menus.h" />
     <ClInclude Include="Piloto.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

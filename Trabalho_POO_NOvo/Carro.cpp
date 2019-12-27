@@ -30,6 +30,11 @@ int Carro::getVelocidade_max()
 	return velocidade_max;
 }
 
+int Carro::getTempo()
+{
+	return tempo;
+}
+
 Piloto* Carro::getPilotoPar()
 {
 	return piloto_par;
@@ -38,4 +43,9 @@ Piloto* Carro::getPilotoPar()
 void Carro::setPilotoPar(Piloto* pil_par)
 {
 	piloto_par = pil_par;
+}
+
+void Carro::setTempo(int segundos)
+{
+	tempo = tempo + segundos;
 }
