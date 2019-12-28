@@ -135,10 +135,12 @@ void DGV::entraNoCarro(char let_car, string name_pil)
 							(*ita)->setPilotoPar(*itb);
 							(*itb)->setCarroPar(*ita);
 							cout << "O piloto" << (*ita)->getPilotoPar()->getNome() << "foi inserido no carro: " << (*itb)->getCarroPar()->getId_carro() << endl;
+							return;
 						}
 						else
 						{
 							cout << "O piloto escolhido já se encontra no carro: " << (*itb)->getCarroPar()->getId_carro() << endl;
+							return;
 						}
 					}
 					else 
@@ -146,15 +148,20 @@ void DGV::entraNoCarro(char let_car, string name_pil)
 						if ((*itb)->getCarroPar() != nullptr)
 						{
 							cout << "O piloto escolhido já se encontra no carro: " << (*itb)->getCarroPar()->getId_carro() << " e o carro escolhido já tem sentado o piloto: " << (*ita)->getPilotoPar()->getNome() << endl;
+							return;
 						}
 						else
 						{
 							cout << "O carro escolhido já tem sentado o piloto: " << (*ita)->getPilotoPar()->getNome() << endl;
+							return;
 						}
 					}
 				}
 			}
+			cout << "O Piloto " << name_pil << " não existe" << endl;
+			return;
 		}
+		cout << "O carro " << let_car << " não existe" << endl;
 	}
 	
 }
@@ -177,6 +184,7 @@ void DGV::saiDoCarro(char let_car)
 			else 
 			{
 				cout << "O carro " << let_car << " esta vazio" << endl;
+				return;
 			}
 		}
 	}

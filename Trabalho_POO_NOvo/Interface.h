@@ -9,6 +9,8 @@
 class Interface
 {
 
+	DGV dgva;
+	Autodromos autoa;
 public:
 	Interface() {}
 

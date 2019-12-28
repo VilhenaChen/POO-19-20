@@ -3,8 +3,6 @@
 bool Interface::menu_inicial()
 {
 	string com, com_completo;
-	DGV dgva;
-	Autodromos autoa;
 	vector <string> vet_var_comando;
 	com.clear();
 	cout << "\nMENU PRINCIPAL" << endl;
@@ -45,6 +43,7 @@ bool Interface::menu_inicial()
 	comprim.empty();
 	string letr_car;
 	letr_car.empty();
+	string espaco = " ";
 	if (com == "carregaP" && k < vet_var_comando.size())
 	{
 		dgva.leFicheiroPilotos(vet_var_comando[k]);
@@ -78,10 +77,15 @@ bool Interface::menu_inicial()
 						k++;
 						marca = vet_var_comando[k];
 						k++;
-						if (k < vet_var_comando[k].size())
+						if (k < (vet_var_comando.size()))
 						{
 							modelo = vet_var_comando[k];
 							k++;
+							for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
+							{
+								modelo = modelo + espaco;
+								modelo = modelo + vet_var_comando[i];
+							}
 							dgva.addCarro(stoi(en_at), stoi(en_max), marca, modelo);
 						}
 						else
@@ -95,8 +99,11 @@ bool Interface::menu_inicial()
 						{
 							genero_pil = vet_var_comando[k];
 							k++;
-							for (unsigned int i = k; i < vet_var_comando.size(); i++)
+							name_pil = vet_var_comando[k];
+							k++;
+							for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
 							{
+								name_pil = name_pil + espaco;
 								name_pil = name_pil + vet_var_comando[i];
 							}
 							dgva.addPiloto(name_pil);
@@ -108,10 +115,15 @@ bool Interface::menu_inicial()
 
 								maximoC = vet_var_comando[k];
 								k++;
-								name_aut = vet_var_comando[k];
-								k++;
 								comprim = vet_var_comando[k];
 								k++;
+								name_aut = vet_var_comando[k];
+								k++;
+								for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
+								{
+									name_aut = name_aut + espaco;
+									name_aut = name_aut + vet_var_comando[i];
+								}
 								autoa.addAutodromo(stoi(maximoC), stoi(comprim), name_aut);
 							}
 						}
@@ -133,14 +145,28 @@ bool Interface::menu_inicial()
 						{
 							if (tipo == "p")
 							{
-								dgva.apagaPiloto(vet_var_comando[k]);
+								name_pil = vet_var_comando[k];
+								k++;
+								for (unsigned int i = k; i < vet_var_comando.size(); i++)
+								{
+									name_pil = name_pil + espaco;
+									name_pil = name_pil + vet_var_comando[i];
+								}
+								dgva.apagaPiloto(name_pil);
 								k++;
 							}
 							else
 							{
 								if (tipo == "a")
 								{
-									autoa.apagaAutodromo(vet_var_comando[k]);
+									name_aut = vet_var_comando[k];
+									k++;
+									for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
+									{
+										name_aut = name_aut + espaco;
+										name_aut = name_aut + vet_var_comando[i];
+									}
+									autoa.apagaAutodromo(name_aut);
 									k++;
 								}
 
@@ -155,6 +181,11 @@ bool Interface::menu_inicial()
 							k++;
 							name_pil = vet_var_comando[k];
 							k++;
+							for (unsigned int i = k; i < vet_var_comando.size(); i++)
+							{
+								name_pil = name_pil + espaco;
+								name_pil = name_pil + vet_var_comando[i];
+							}
 							dgva.entraNoCarro(letr_car[0], name_pil);
 						}
 						else
