@@ -32,9 +32,9 @@ public:
 
 	//sets
 	void setPilotoPar(Piloto* pil_par);
-	void setTempo(int segundos):
+	//void setTempo(int segundos);
 
-	virtual ~Carro() 
+	virtual ~Carro()
 	{
 	}
 };

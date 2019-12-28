@@ -12,7 +12,8 @@ using namespace std;
 
 int main()
 {
-	Interface intera; ??
+	Interface intera;
+	intera.lancaMenuInicial();
 
 	/*int op = 0, en_at, en_max, resp, maxCar, comp;
 	string mar, mod, nome;

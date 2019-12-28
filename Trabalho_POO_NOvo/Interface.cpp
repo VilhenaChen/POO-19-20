@@ -7,7 +7,8 @@ bool Interface::menu_inicial()
 	Autodromos autoa;
 	vector <string> vet_var_comando;
 	com.clear();
-	cout << "COMANDOS" << endl;
+	cout << "\nMENU PRINCIPAL" << endl;
+	cout << "\nCOMANDOS" << endl;
 	cout << endl;
 	cout << "carregaP <nomeFicheiro>" << endl;
 	cout << "carregaC <nomeFicheiro>" << endl;
@@ -177,7 +178,7 @@ bool Interface::menu_inicial()
 									}
 									else
 									{
-										return true;
+										return false;
 									}
 								}
 							}
@@ -187,7 +188,7 @@ bool Interface::menu_inicial()
 			}
 		}
 	}
-	return false;
+	return true;
 }
 
 bool Interface::menu_campeonato()
@@ -244,3 +245,4 @@ void Interface::lancaMenuCampeonato()
 {
 
 }
+

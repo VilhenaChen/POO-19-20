@@ -25,6 +25,6 @@ public:
 	void lancaMenuInicial();
 	void lancaMenuCampeonato();
 
+
 	virtual ~Interface() {}
 };
-

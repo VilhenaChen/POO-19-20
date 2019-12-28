@@ -154,6 +154,7 @@
     <ClCompile Include="Autodromo.cpp" />
     <ClCompile Include="Autodromos.cpp" />
     <ClCompile Include="Carro.cpp" />
+    <ClCompile Include="Consola.cpp" />
     <ClCompile Include="DGV.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Piloto.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Autodromo.h" />
     <ClInclude Include="Autodromos.h" />
     <ClInclude Include="Carro.h" />
+    <ClInclude Include="Consola.h" />
     <ClInclude Include="DGV.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Piloto.h" />

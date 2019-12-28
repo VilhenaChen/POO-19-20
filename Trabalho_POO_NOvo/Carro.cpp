@@ -45,7 +45,8 @@ void Carro::setPilotoPar(Piloto* pil_par)
 	piloto_par = pil_par;
 }
 
-void Carro::setTempo(int segundos)
+/*void Carro::setTempo(int segundos)
 {
 	tempo = tempo + segundos;
 }
+*/
