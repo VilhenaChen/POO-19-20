@@ -39,17 +39,43 @@ string Campeonato::getAsString()
 	return s.str();
 }
 
+int Campeonato::getNumero_corrida()
+{
+	return numero_corrida;
+}
+
+void Campeonato::setNumero_corrida(int num)
+{
+	numero_corrida = num;
+}
+
 void Campeonato::passatempo(int seg)
 {
 	int tempo_atual;
 	int tempo;
+	int pos;
+	int comp;
+	int nc;
+	nc = getNumero_corrida;
+	comp = autodromos_campeonato[nc]->getComp;
 	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 	{
 		tempo_atual = (*it)->getTempo();
-		tempo = tempo_atual + seg;
-		(*it)->setTempo(tempo);
+		pos = (*it)->getPosicao;
+		if (pos < comp)
+		{
+			tempo = tempo_atual + seg;
+			(*it)->setTempo(tempo);
+		}
 	}
+}
 
+void Campeonato::classificacao()
+{
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+	{
+		(*it)->getTempo;
+	}
 }
 
 ostream& operator << (ostream& out, Campeonato& a)

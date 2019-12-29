@@ -55,6 +55,11 @@ bool Par_Campeonato::getSinal()
 	return sinal_emergencia;
 }
 
+int Par_Campeonato::getPontos()
+{
+	return pontos;
+}
+
 void Par_Campeonato::setPosicao(int pos)
 {
 	posicao_pista = pos;
@@ -98,4 +103,9 @@ void Par_Campeonato::setVelocidae(int velo)
 void Par_Campeonato::setSinal(bool sig)
 {
 	sinal_emergencia = sig;
+}
+
+void Par_Campeonato::setPontos(int pon)
+{
+	pontos = pon;
 }

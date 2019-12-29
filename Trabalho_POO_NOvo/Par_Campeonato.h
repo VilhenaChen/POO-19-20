@@ -7,11 +7,13 @@ class Par_Campeonato
 	bool acelerador_pressionado = false, travao_pressionado = false;
 	int velocidade_atual = 0;
 	bool sinal_emergencia = false;
+	int pontos = 0;
 	Carro* carro_par;
 	Piloto* piloto_par;
 
 public:
 	Par_Campeonato(Carro* car, Piloto* pilot) : carro_par(car), piloto_par(pilot) {}
+
 	//get
 	Piloto* getPiloto();
 	Carro* getCarro();
@@ -24,6 +26,7 @@ public:
 	bool getTravao();
 	int getVelocidade();
 	bool getSinal();
+	int getPontos();
 
 	//set
 	void setPosicao(int pos);
@@ -35,6 +38,7 @@ public:
 	void setTravao(bool trava);
 	void setVelocidae(int velo);
 	void setSinal(bool sig);
+	void setPontos(int pon);
 
 
 	virtual ~Par_Campeonato()
