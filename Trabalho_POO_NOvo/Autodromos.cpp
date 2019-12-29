@@ -50,6 +50,18 @@ void Autodromos::apagaAutodromo(string name_aut)
 	cout << "O autodromo " << name_aut << " não existe" << endl;
 }
 
+Autodromo* Autodromos::encontraAutodromo(string name_aut)
+{
+	for (auto it = vetor_autodromos.begin(); it < vetor_autodromos.end(); it++)
+	{
+		if (name_aut == (*it)->getNome())
+		{
+			return (*it);
+		}
+	}
+	return nullptr;
+}
+
 string Autodromos::getAsString()
 {
 	ostringstream s;

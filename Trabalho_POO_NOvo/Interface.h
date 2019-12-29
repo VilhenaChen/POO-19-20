@@ -6,13 +6,17 @@
 #include <fstream>
 #include "Autodromos.h"
 #include "DGV.h"
+#include "Campeonato.h"
 class Interface
 {
 
 	DGV dgva;
 	Autodromos autoa;
+	Campeonato campea;
+
 public:
 	Interface() {}
+
 
 	//menu inicial
 	bool menu_inicial();
@@ -27,6 +31,9 @@ public:
 	void lancaMenuInicial();
 	void lancaMenuCampeonato();
 
+	//choose
+	void addAutodromoCampeonato(string name_aut);
+	void addParesCampeonato();
 
 	virtual ~Interface() {}
 };

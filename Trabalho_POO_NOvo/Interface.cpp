@@ -203,13 +203,19 @@ bool Interface::menu_inicial()
 								}
 								else
 								{
-									if (com != "campeonato")
+									if (com == "campeonato")
 									{
-										cout << "Comando Invavalido!!!" << endl;
+										for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
+										{
+											string autos;
+											autos = vet_var_comando[i];
+											this->addAutodromoCampeonato(autos);
+										}
+										return false;
 									}
 									else
 									{
-										return false;
+										cout << "Comando Invalido!!!" << endl;
 									}
 								}
 							}
@@ -247,7 +253,77 @@ bool Interface::menu_campeonato()
 	vet_var_comando = getTokens(com_completo);
 	unsigned int k = 0;
 	com = vet_var_comando[k];
-	return false;
+	k++;
+	string segundos;
+	segundos.empty();
+	if (com == "listacarros")
+	{
+		cout << campea << endl;
+	}
+	else
+	{
+		if (com == "carregabat")
+		{
+
+		}
+		else
+		{
+			if (com == "carregatudo")
+			{
+
+			}
+			else
+			{
+				if (com == "corrida")
+				{
+
+				}
+				else
+				{
+					if (com == "acidente")
+					{
+
+					}
+					else
+					{
+						if (com == "stop")
+						{
+
+						}
+						else
+						{
+							if (com == "destroi")
+							{
+
+							}
+							else
+							{
+								if (com == "passatempo")
+								{
+									segundos = vet_var_comando[k];
+									k++;
+									campea.passatempo(stoi(segundos));
+								}
+								else
+								{
+									if (com == "log")
+									{
+
+									}
+									else
+									{
+										cout << "Comando Invalido!!!" << endl;
+										return false;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return true;
 }
 
 vector<string> Interface::getTokens(string stri)
@@ -268,12 +344,42 @@ void Interface::lancaMenuInicial()
 	{
 		mp = menu_inicial();
 	} while (mp != false);
-	
+
+	addParesCampeonato();
 	lancaMenuCampeonato();
 }
 
 void Interface::lancaMenuCampeonato()
 {
-
+	bool mc;
+	do
+	{
+		mc = menu_campeonato();
+	} while (mc != false);
+	
+	lancaMenuInicial();
 }
+
+void Interface::addAutodromoCampeonato(string name_aut)
+{
+	campea.addAutodromoCampeonato(autoa.encontraAutodromo(name_aut));
+}
+
+void Interface::addParesCampeonato()
+{
+	int max=0,npares,pos=0;
+	Piloto* pilot;
+	max = campea.EncontraAutodromoComMenorMaxCarros();
+	for (npares = 1; (npares <= max) && (pos<dgva.getTamVetorPilotos()); npares++) 
+	{
+		pilot = dgva.getPilotoSegundoPosicaoNoVetor(pos);
+		if (pilot->getCarroPar() != nullptr) 
+		{
+			campea.addParCampeonato(pilot);
+		}
+		pos++;
+	}
+}
+
+
 

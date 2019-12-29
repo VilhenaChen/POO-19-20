@@ -61,6 +61,19 @@ string DGV::findNextNamePiloto(string name)
 	return test_name;
 }
 
+Piloto* DGV::getPilotoSegundoPosicaoNoVetor(int posi)
+{
+	return vetor_pilotos[posi];
+}
+
+size_t DGV::getTamVetorPilotos()
+{
+	size_t tam=vetor_pilotos.size();
+	return tam;
+}
+
+
+
 bool DGV::leFicheiroCarros(string nome_ficheiro)
 {
 	ifstream f(nome_ficheiro);

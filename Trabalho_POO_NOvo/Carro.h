@@ -9,12 +9,8 @@ class Carro
 	string marca, modelo;
 	char id_carro;
 	int energia_max, energia_atual;
-	bool ligado = false;
-	int velocidade_max = 200, velocidade_atual = 0;
-	bool acelerador_pressionado = false, travao_pressionado = false;
-	bool sinal_emergencia = false;
+	int velocidade_max = 200;
 	bool avariado = false;
-	int tempo = 0;
 	Piloto* piloto_par = nullptr;
 
 public:

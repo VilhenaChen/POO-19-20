@@ -24,7 +24,9 @@ public:
 	char findNextID();
 	string findNextNamePiloto(string name);
 
-	//check
+	//get
+	Piloto* getPilotoSegundoPosicaoNoVetor(int posi);
+	size_t getTamVetorPilotos();
 
 	//read from file
 	bool leFicheiroCarros(string nome_ficheiro);

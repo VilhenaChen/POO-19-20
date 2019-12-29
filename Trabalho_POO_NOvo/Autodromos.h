@@ -22,7 +22,9 @@ public:
 
 	//erase
 	void apagaAutodromo(string name_aut);
-
+	
+	//find
+	Autodromo* encontraAutodromo(string name_aut);
 
 	string getAsString();
 

@@ -153,20 +153,24 @@
   <ItemGroup>
     <ClCompile Include="Autodromo.cpp" />
     <ClCompile Include="Autodromos.cpp" />
+    <ClCompile Include="Campeonato.cpp" />
     <ClCompile Include="Carro.cpp" />
     <ClCompile Include="Consola.cpp" />
     <ClCompile Include="DGV.cpp" />
     <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="Par_Campeonato.cpp" />
     <ClCompile Include="Piloto.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Autodromo.h" />
     <ClInclude Include="Autodromos.h" />
+    <ClInclude Include="Campeonato.h" />
     <ClInclude Include="Carro.h" />
     <ClInclude Include="Consola.h" />
     <ClInclude Include="DGV.h" />
     <ClInclude Include="Interface.h" />
+    <ClInclude Include="Par_Campeonato.h" />
     <ClInclude Include="Piloto.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
