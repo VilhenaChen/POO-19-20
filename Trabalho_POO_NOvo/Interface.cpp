@@ -305,6 +305,7 @@ bool Interface::menu_campeonato()
 									segundos = vet_var_comando[k];
 									k++;
 									campea.passatempo(stoi(segundos));
+									campea.setClassificacaoCorrida();
 									campea.mostraInformacaoCorrridaOrganizada();
 									if (campea.verificaSeJaTodosAcabaram() == true) 
 									{

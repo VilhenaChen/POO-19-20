@@ -34,7 +34,7 @@ string Campeonato::getAsString()
 	s << "Pares" <<endl;
 	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 	{
-		s << "Nome: " <<(*it)->getPiloto()->getNome()<<" ID Carro: "<<(*it)->getCarro()->getId_carro()<< " Tempo: " << (*it)->getTempo()<<endl;
+		s << "Nome: " << (*it)->getPiloto()->getNome() << " ID Carro: " << (*it)->getCarro()->getId_carro() << " Tempo: " << (*it)->getTempo() << " Velocidade: " << (*it)->getVelocidade() << " Posicao pista: "<< (*it)->getPosicao()<< " Classificacao: "<< (*it)->getLugarPista()<<endl;
 	}
 	return s.str();
 }
@@ -61,10 +61,9 @@ void Campeonato::setCorridaDecorrer(bool cor)
 
 void Campeonato::setClassificacaoCorrida()
 {
-	int numc = getNumero_corrida();
-	int comp = autodromos_campeonato[numc]->getComp();
+	int comp = autodromos_campeonato[numero_corrida]->getComp();
 	int lugar = 1;
-	int cont=0;
+	int cont = 0;
 	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 	{
 		if ((*it)->getTerminouCorrida() == true) 
@@ -75,9 +74,9 @@ void Campeonato::setClassificacaoCorrida()
 			}
 		}
 	}
-	lugar = cont + 1;
 	for (int i = comp; i >= 0 ; i--) 
 	{
+		lugar = cont + 1;
 		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 		{
 			if ((*it)->getTerminouCorrida() == false)
@@ -86,6 +85,7 @@ void Campeonato::setClassificacaoCorrida()
 				{
 					(*it)->setLugarPista(lugar);
 					cont++;
+
 					if ((*it)->getPosicao() == comp)
 					{
 						(*it)->setTerminouCorrida(true);
@@ -93,9 +93,7 @@ void Campeonato::setClassificacaoCorrida()
 				}
 			}
 		}
-		lugar = cont;
 	}
-
 }
 
 void Campeonato::setClassificacaoCampeonato()
@@ -105,9 +103,6 @@ void Campeonato::setClassificacaoCampeonato()
 
 void Campeonato::preparaCorrida()
 {
-	int nc;
-	nc = getNumero_corrida();
-	setNumero_corrida(nc);
 	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 	{
 		(*it)->setPosicao(0);
@@ -115,6 +110,7 @@ void Campeonato::preparaCorrida()
 		(*it)->setLugarCampeonato(0);
 		(*it)->setTempo(0);
 		(*it)->setVelocidae(1);
+		(*it)->setTerminouCorrida(false);
 	}
 }
 
@@ -134,14 +130,14 @@ void Campeonato::acabaCorrida()
 	mostraInformacaoCorrridaOrganizada();
 	atribuiPontos();
 	setCorridaDecorrer(false);
-	setNumero_corrida(getNumero_corrida() + 1);
+	numero_corrida++;
 
 }
 
 
 void Campeonato::mostraInformacaoCorrridaOrganizada()
 {
-	cout << "Informacao sobre a corrida no autodromo " << autodromos_campeonato[getNumero_corrida()]->getNome() << " (" << autodromos_campeonato[getNumero_corrida()]->getComp() << " m) :" << endl;
+	cout << "Informacao sobre a corrida no autodromo " << autodromos_campeonato[numero_corrida]->getNome() << " (" << autodromos_campeonato[numero_corrida]->getComp() << " m) :" << endl;
 	for (int i = 1; i < pares_campeonato.size(); i++)
 	{
 		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
@@ -151,6 +147,7 @@ void Campeonato::mostraInformacaoCorrridaOrganizada()
 				cout << i << ". " << (*it)->getCarro()->getId_carro() << " " << (*it)->getCarro()->getMarca()  << " / " << (*it)->getPiloto()->getNome() << " ( " << (*it)->getPiloto()->getPersonalidade() << ") - " << (*it)->getCarro()->getEnergia_atual() << "mAh, " << (*it)->getCarro()->getEnergia_max() << "mAh - " << (*it)->getPosicao() << "m - " << (*it)->getVelocidade() << "m/s" << endl;
 			}
 		}
+
 	}
 }
 
@@ -204,10 +201,8 @@ void Campeonato::passatempo(int seg)
 	int tempo;
 	int pos;
 	int comp;
-	int nc;
-	nc = getNumero_corrida();
-	comp = autodromos_campeonato[nc]->getComp();
-	for (int i = 0; i < seg; i++)
+	comp = autodromos_campeonato[numero_corrida]->getComp();
+	for (int i = 1; i <= seg; i++)
 	{
 		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 		{
@@ -215,13 +210,12 @@ void Campeonato::passatempo(int seg)
 			pos = (*it)->getPosicao();
 			if (pos < comp)
 			{
-				tempo = tempo_atual + i;
+				tempo = tempo_atual + 1;
 				(*it)->setTempo(tempo);
-				pos = pos + (*it)->getVelocidade();
+				pos =(((*it)->getVelocidade())*((*it)->getTempo()));
 				(*it)->setPosicao(pos);
 			}
 		}
-		setClassificacaoCorrida();
 	}
 }
 

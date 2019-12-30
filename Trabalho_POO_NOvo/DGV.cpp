@@ -174,8 +174,8 @@ void DGV::entraNoCarro(char let_car, string name_pil)
 			cout << "O Piloto " << name_pil << " não existe" << endl;
 			return;
 		}
-		cout << "O carro " << let_car << " não existe" << endl;
 	}
+	cout << "O carro " << let_car << " não existe" << endl;
 	
 }
 
