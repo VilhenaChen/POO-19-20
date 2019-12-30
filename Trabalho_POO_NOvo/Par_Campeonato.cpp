@@ -60,6 +60,11 @@ int Par_Campeonato::getPontos()
 	return pontos;
 }
 
+bool Par_Campeonato::getTerminouCorrida()
+{
+	return terminou_corrida;
+}
+
 void Par_Campeonato::setPosicao(int pos)
 {
 	posicao_pista = pos;
@@ -108,4 +113,9 @@ void Par_Campeonato::setSinal(bool sig)
 void Par_Campeonato::setPontos(int pon)
 {
 	pontos = pon;
+}
+
+void Par_Campeonato::setTerminouCorrida(bool term)
+{
+	terminou_corrida = term;
 }

@@ -1,3 +1,4 @@
+
 #include "Interface.h"
 
 bool Interface::menu_inicial()
@@ -274,9 +275,10 @@ bool Interface::menu_campeonato()
 			}
 			else
 			{
-				if (com == "corrida")
+				if (com == "corrida" && campea.getCorridaDecorrer()==false)
 				{
-
+					campea.preparaCorrida();
+					campea.lancaCorrida();
 				}
 				else
 				{
@@ -298,11 +300,16 @@ bool Interface::menu_campeonato()
 							}
 							else
 							{
-								if (com == "passatempo")
+								if (com == "passatempo" && campea.getCorridaDecorrer()==true)
 								{
 									segundos = vet_var_comando[k];
 									k++;
 									campea.passatempo(stoi(segundos));
+									campea.mostraInformacaoCorrridaOrganizada();
+									if (campea.verificaSeJaTodosAcabaram() == true) 
+									{
+										campea.acabaCorrida();
+									}
 								}
 								else
 								{
