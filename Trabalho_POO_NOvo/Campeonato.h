@@ -40,6 +40,10 @@ public:
 	//Launch
 	void lancaCorrida();
 
+	//Charge
+	void carregaAllBat();
+	void carregaBat(char idcarro, float energia);
+
 	//Finish
 	void acabaCorrida();
 

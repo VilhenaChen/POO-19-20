@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-void DGV::addCarro(int ener_atual, int ener_max, string brand, string model)
+void DGV::addCarro(float ener_atual, float ener_max, string brand, string model)
 {
 	char id = this->findNextID();
 	vetor_carros.push_back(new Carro(id, ener_atual, ener_max, brand, model));
@@ -95,7 +95,7 @@ bool DGV::leFicheiroCarros(string nome_ficheiro)
 				mod = mod + espaco;
 				mod = mod + aux;
 			}
-			this->addCarro(stoi(en_at), stoi(en_max), marc, mod);
+			this->addCarro(stof(en_at), stof(en_max), marc, mod);
 		}
 		f.close();
 		return true;

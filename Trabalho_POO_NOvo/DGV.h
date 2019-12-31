@@ -15,7 +15,7 @@ class DGV
 
 public:
 	//add
-	void addCarro(int ener_atual, int ener_max, string brand, string model="Modelo Base");
+	void addCarro(float ener_atual, float ener_max, string brand, string model="Modelo Base");
 	void addPiloto(string nome, string personalidade = "Generico");
 
 	//erase

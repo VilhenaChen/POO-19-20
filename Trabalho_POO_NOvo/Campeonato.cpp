@@ -124,6 +124,48 @@ void Campeonato::lancaCorrida()
 		cout << "Nome: " <<(*it)->getPiloto()->getNome()<<" ID Carro: "<<(*it)->getCarro()->getId_carro()<< " Tempo: " << (*it)->getTempo()<<endl;
 	}
 }
+
+void Campeonato::carregaAllBat()
+{
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+	{
+		if ((*it)->getLigado() == false)
+		{
+			float enMax;
+			enMax = (*it)->getCarro()->getEnergia_max();
+			(*it)->getCarro()->setEnergia_atual(enMax);
+		}
+		else
+		{
+			cout << "[ERRO] O Carro " << (*it)->getCarro()->getId_carro() << " nao esta parado!!" << endl;
+		}
+	}
+
+}
+
+void Campeonato::carregaBat(char idcarro, float energia)
+{
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+	{
+		if ((*it)->getCarro()->getId_carro() == idcarro)
+		{
+			if ((*it)->getLigado() == false)
+			{
+				(*it)->getCarro()->setEnergia_atual(energia);
+			}
+			else
+			{
+				cout << "[ERRO] O carro nao esta Parado!!!" << endl;
+			}
+		}
+		else
+		{
+			cout << "[ERRO] O Carro nao esta a participar neste Campeoonato" << endl;
+		}
+	}
+
+}
+
 void Campeonato::acabaCorrida()
 {
 	cout << "Classificação final da corrida: " << endl;
@@ -133,7 +175,6 @@ void Campeonato::acabaCorrida()
 	numero_corrida++;
 
 }
-
 
 void Campeonato::mostraInformacaoCorrridaOrganizada()
 {
@@ -194,7 +235,6 @@ void Campeonato::atribuiPontos()
 	}
 }
 
-
 void Campeonato::passatempo(int seg)
 {
 	int tempo_atual;
@@ -218,7 +258,6 @@ void Campeonato::passatempo(int seg)
 		}
 	}
 }
-
 
 ostream& operator << (ostream& out, Campeonato& a)
 {

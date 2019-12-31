@@ -87,11 +87,11 @@ bool Interface::menu_inicial()
 								modelo = modelo + espaco;
 								modelo = modelo + vet_var_comando[i];
 							}
-							dgva.addCarro(stoi(en_at), stoi(en_max), marca, modelo);
+							dgva.addCarro(stof(en_at), stof(en_max), marca, modelo);
 						}
 						else
 						{
-							dgva.addCarro(stoi(en_at), stoi(en_max), marca);
+							dgva.addCarro(stof(en_at), stof(en_max), marca);
 						}
 					}
 					else
@@ -256,7 +256,11 @@ bool Interface::menu_campeonato()
 	com = vet_var_comando[k];
 	k++;
 	string segundos;
+	string energia;
 	segundos.empty();
+	energia.empty();
+	string letr_car;
+	letr_car.empty();
 	if (com == "listacarros")
 	{
 		cout << campea << endl;
@@ -265,13 +269,18 @@ bool Interface::menu_campeonato()
 	{
 		if (com == "carregabat")
 		{
+			letr_car = vet_var_comando[k];
+			k++;
+			energia = vet_var_comando[k];
+			k++;
+			campea.carregaBat(letr_car[0], stof(energia));;
 
 		}
 		else
 		{
 			if (com == "carregatudo")
 			{
-
+				campea.carregaAllBat();
 			}
 			else
 			{

@@ -15,12 +15,12 @@ char Carro::getId_carro()
 	return id_carro;
 }
 
-int Carro::getEnergia_max()
+float Carro::getEnergia_max()
 {
 	return energia_max;
 }
 
-int Carro::getEnergia_atual()
+float Carro::getEnergia_atual()
 {
 	return energia_atual;
 }
@@ -38,4 +38,9 @@ Piloto* Carro::getPilotoPar()
 void Carro::setPilotoPar(Piloto* pil_par)
 {
 	piloto_par = pil_par;
+}
+
+void Carro::setEnergia_atual(float energia)
+{
+	energia_atual = energia;
 }
