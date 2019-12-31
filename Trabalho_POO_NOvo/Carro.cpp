@@ -30,6 +30,11 @@ int Carro::getVelocidade_max()
 	return velocidade_max;
 }
 
+bool Carro::getAvariado()
+{
+	return avariado;
+}
+
 Piloto* Carro::getPilotoPar()
 {
 	return piloto_par;
@@ -43,4 +48,9 @@ void Carro::setPilotoPar(Piloto* pil_par)
 void Carro::setEnergia_atual(float energia)
 {
 	energia_atual = energia;
+}
+
+void Carro::setAvariado(bool ava)
+{
+	avariado == ava;
 }

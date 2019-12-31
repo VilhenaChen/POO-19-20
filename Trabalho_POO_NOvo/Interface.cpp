@@ -261,6 +261,8 @@ bool Interface::menu_campeonato()
 	energia.empty();
 	string letr_car;
 	letr_car.empty();
+	string nome_piloto;
+	nome_piloto.empty();
 	if (com == "listacarros")
 	{
 		cout << campea << endl;
@@ -293,13 +295,17 @@ bool Interface::menu_campeonato()
 				{
 					if (com == "acidente")
 					{
-
+						letr_car = vet_var_comando[k];
+						k++;
+						campea.acidente(letr_car[0]);
 					}
 					else
 					{
 						if (com == "stop")
 						{
-
+							nome_piloto = vet_var_comando[k];
+							k++;
+							campea.paraCarro(nome_piloto);
 						}
 						else
 						{

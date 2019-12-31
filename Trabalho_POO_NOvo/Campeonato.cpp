@@ -166,6 +166,67 @@ void Campeonato::carregaBat(char idcarro, float energia)
 
 }
 
+void Campeonato::aumentavelocidade(char idcarro)
+{
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+	{
+		if ((*it)->getAcelerador == true)
+		{
+			int vel;
+			vel = (*it)->getVelocidade + 1;
+			(*it)->setVelocidae(vel);
+		}
+	}
+}
+
+void Campeonato::diminuivelocidade(char idcarro)
+{
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+	{
+		if ((*it)->getTravao == true)
+		{
+			int vel;
+			vel = (*it)->getVelocidade - 1;
+			(*it)->setVelocidae(vel);
+		}
+	}
+}
+
+void Campeonato::paraCarro(string nome)
+{
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+	{
+		if ((*it)->getPiloto()->getNome == nome)
+		{
+			(*it)->setAcelerador(false);
+			(*it)->setTravao(true);
+			(*it)->setSaiucorrida(true);
+		}
+		else
+		{
+			cout << "O Piloto " << nome << " nao esta a participar!!!" << endl;
+		}
+	}
+}
+
+void Campeonato::acidente(char idcarro)
+{
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+	{
+		if ((*it)->getCarro()->getId_carro() == idcarro)
+		{
+			if ((*it)->getCarro()->getAvariado() == false)
+			{
+				(*it)->getCarro()->setAvariado(true);
+			}
+		}
+		else
+		{
+			cout << "O carro " << idcarro << " nao existe!!!" << endl;
+		}
+	}
+}
+
 void Campeonato::acabaCorrida()
 {
 	cout << "Classificação final da corrida: " << endl;

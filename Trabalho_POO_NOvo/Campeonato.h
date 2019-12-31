@@ -44,6 +44,16 @@ public:
 	void carregaAllBat();
 	void carregaBat(char idcarro, float energia);
 
+	//Change Speed
+	void aumentavelocidade(char idcarro);
+	void diminuivelocidade(char idcarro);
+
+	//Stop
+	void paraCarro(string nome);
+
+	//Acident
+	void acidente(char idcarro);
+
 	//Finish
 	void acabaCorrida();
 

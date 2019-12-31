@@ -23,11 +23,13 @@ public:
 	float getEnergia_max();
 	float getEnergia_atual();
 	int getVelocidade_max();
+	bool getAvariado();
 	Piloto* getPilotoPar();
 
 	//sets
 	void setPilotoPar(Piloto* pil_par);
 	void setEnergia_atual(float energia);
+	void setAvariado(bool ava);
 
 	virtual ~Carro()
 	{

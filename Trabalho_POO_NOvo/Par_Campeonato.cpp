@@ -60,6 +60,11 @@ int Par_Campeonato::getPontos()
 	return pontos;
 }
 
+bool Par_Campeonato::getSaiucorrida()
+{
+	return saiucorrida;
+}
+
 bool Par_Campeonato::getTerminouCorrida()
 {
 	return terminou_corrida;
@@ -113,6 +118,11 @@ void Par_Campeonato::setSinal(bool sig)
 void Par_Campeonato::setPontos(int pon)
 {
 	pontos = pon;
+}
+
+void Par_Campeonato::setSaiucorrida(bool saiu)
+{
+	saiucorrida = saiu;
 }
 
 void Par_Campeonato::setTerminouCorrida(bool term)
