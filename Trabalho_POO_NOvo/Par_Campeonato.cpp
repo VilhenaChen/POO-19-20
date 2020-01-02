@@ -70,6 +70,16 @@ bool Par_Campeonato::getTerminouCorrida()
 	return terminou_corrida;
 }
 
+int Par_Campeonato::getSegacel()
+{
+	return segacel;
+}
+
+int Par_Campeonato::getSegsemacel()
+{
+	return segsemacel;
+}
+
 void Par_Campeonato::setPosicao(int pos)
 {
 	posicao_pista = pos;
@@ -105,7 +115,7 @@ void Par_Campeonato::setTravao(bool trava)
 	travao_pressionado = trava;
 }
 
-void Par_Campeonato::setVelocidae(int velo)
+void Par_Campeonato::setVelocidade(int velo)
 {
 	velocidade_atual = velo;
 }
@@ -128,4 +138,34 @@ void Par_Campeonato::setSaiucorrida(bool saiu)
 void Par_Campeonato::setTerminouCorrida(bool term)
 {
 	terminou_corrida = term;
+}
+
+void Par_Campeonato::setSegacel(int seg)
+{
+	segacel = seg;
+}
+
+void Par_Campeonato::setSegsemacel(int seg)
+{
+	segsemacel = seg;
+}
+
+void Par_Campeonato::aumentaVelocidade()
+{
+	int vel;
+	vel = getVelocidade();
+	if (getAcelerador() == true)
+	{
+		setVelocidade(vel + 1);
+	}
+}
+
+void Par_Campeonato::diminuiVelocidade()
+{
+	int vel;
+	vel = getVelocidade();
+	if (getTravao() == true)
+	{
+		setVelocidade(vel - 1);
+	}
 }

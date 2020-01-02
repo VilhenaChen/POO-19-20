@@ -52,5 +52,5 @@ void Carro::setEnergia_atual(float energia)
 
 void Carro::setAvariado(bool ava)
 {
-	avariado == ava;
+	avariado = ava;
 }

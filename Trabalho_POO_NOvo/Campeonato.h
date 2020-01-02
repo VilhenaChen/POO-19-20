@@ -27,6 +27,9 @@ public:
 	string getAsString();
 	int getNumero_corrida();
 	bool getCorridaDecorrer();
+	int getTotalvetor();
+	char getIDCarro(int posicao);
+	Carro* getCarro(char idcarro);
 
 	//set
 	void setNumero_corrida(int num);
@@ -40,13 +43,21 @@ public:
 	//Launch
 	void lancaCorrida();
 
+	//Driver Personallity
+	//Crazy Driver
+	/*int inicio();
+	void Lugar(int pos);
+	//int getUltimo();
+	void Perdeulugares();
+	void SemBat(int pos);
+	void probAcidente();
+	*/
+
+	//Fast Driver
+
 	//Charge
 	void carregaAllBat();
 	void carregaBat(char idcarro, float energia);
-
-	//Change Speed
-	void aumentavelocidade(char idcarro);
-	void diminuivelocidade(char idcarro);
 
 	//Stop
 	void paraCarro(string nome);
@@ -62,9 +73,16 @@ public:
 
 	//verify
 	bool verificaSeJaTodosAcabaram();
-
 	//Points
 	void atribuiPontos();
+
+	//Destroy
+	void destroi(char idcarro);
+
+	/*//Crazy Driver
+	void lugar(int pos);
+	int Inicio();*/
+
 
 
 	void passatempo(int seg);

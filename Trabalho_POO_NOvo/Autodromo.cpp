@@ -14,3 +14,8 @@ int Autodromo::getComp()
 {
 	return comprimento;
 }
+
+void Autodromo::addParGaragem(Par_Campeonato* par)
+{
+	gar.addPar(par);
+}

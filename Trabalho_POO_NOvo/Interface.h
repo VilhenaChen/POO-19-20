@@ -7,6 +7,7 @@
 #include "Autodromos.h"
 #include "DGV.h"
 #include "Campeonato.h"
+#include "Consola.h"
 class Interface
 {
 
@@ -23,6 +24,9 @@ public:
 
 	//menu campeonato
 	bool menu_campeonato();
+	
+	//interface Grafica
+	bool interface_grafica();
 
 	//tokens
 	vector<string> getTokens(string stri);

@@ -73,9 +73,19 @@ bool Interface::menu_inicial()
 					if (tipo == "c")
 					{
 						en_at = vet_var_comando[k];
+						if (stof(en_at) < 0)
+						{
+							cout << "[ERRO] O Valor para a Energia Atual nao e valido!!!" << endl;
+							return true;
+						}
 						k++;
 						en_max = vet_var_comando[k];
 						k++;
+						if ((stof(en_max) <= 0) || stof(en_max) < stof(en_at))
+						{
+							cout << "[ERRO] O Valor para a Energia Maximo nao e valido!!!" << endl;
+							return true;
+						}
 						marca = vet_var_comando[k];
 						k++;
 						if (k < (vet_var_comando.size()))
@@ -116,8 +126,18 @@ bool Interface::menu_inicial()
 
 								maximoC = vet_var_comando[k];
 								k++;
+								if (stoi(maximoC) <= 0)
+								{
+									cout << "[ERRO] O Valor para o Maximo de Carros nao e valido!!!" << endl;
+									return true;
+								}
 								comprim = vet_var_comando[k];
 								k++;
+								if (stoi(comprim) <= 0)
+								{
+									cout << "[ERRO] O Valor para o Comprimento nao e valido!!!" << endl;
+									return true;
+								}
 								name_aut = vet_var_comando[k];
 								k++;
 								for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
@@ -243,7 +263,7 @@ bool Interface::menu_campeonato()
 	cout << "carregatudo" << endl;
 	cout << "corrida" << endl;
 	cout << "acidente <letraCarro>" << endl;
-	cout << "stop <letraCarro>" << endl;
+	cout << "stop <nomePiloto>" << endl;
 	cout << "destroi <letraCarro>" << endl;
 	cout << "passatempo <n>" << endl;
 	cout << "log" << endl;
@@ -263,6 +283,7 @@ bool Interface::menu_campeonato()
 	letr_car.empty();
 	string nome_piloto;
 	nome_piloto.empty();
+	Carro* pcarro;
 	if (com == "listacarros")
 	{
 		cout << campea << endl;
@@ -297,6 +318,8 @@ bool Interface::menu_campeonato()
 					{
 						letr_car = vet_var_comando[k];
 						k++;
+						pcarro = campea.getCarro(letr_car[0]);
+						dgva.apagaPiloto(pcarro->getPilotoPar()->getNome());
 						campea.acidente(letr_car[0]);
 					}
 					else
@@ -311,7 +334,10 @@ bool Interface::menu_campeonato()
 						{
 							if (com == "destroi")
 							{
-
+								letr_car = vet_var_comando[k];
+								k++;
+								campea.destroi(letr_car[0]);
+								dgva.apagaCarro(letr_car[0]);
 							}
 							else
 							{
@@ -320,7 +346,6 @@ bool Interface::menu_campeonato()
 									segundos = vet_var_comando[k];
 									k++;
 									campea.passatempo(stoi(segundos));
-									campea.setClassificacaoCorrida();
 									campea.mostraInformacaoCorrridaOrganizada();
 									if (campea.verificaSeJaTodosAcabaram() == true) 
 									{
@@ -347,6 +372,24 @@ bool Interface::menu_campeonato()
 		}
 	}
 	return true;
+}
+
+bool Interface::interface_grafica()
+{
+	int total = 0;
+	total = campea.getTotalvetor();
+	Consola::clrscr();
+	Consola::setScreenSize(50, 80);
+	for (int i = 0; i < total; i++)
+	{
+		char id;
+		id = campea.getIDCarro(i);
+		Consola::gotoxy(0, 0);
+		cout << id << endl;
+		//Ainda nao esta acabado
+
+	}
+	return false;
 }
 
 vector<string> Interface::getTokens(string stri)
