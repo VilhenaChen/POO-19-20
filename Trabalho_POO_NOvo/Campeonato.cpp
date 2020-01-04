@@ -78,20 +78,6 @@ Carro* Campeonato::getCarro(char idcarro)
 	return nullptr;
 }
 
-/*int Campeonato::getUltimo()
-{
-	int lugar = 0, ultimo = 0;
-	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++);
-	{
-		lugar = (*it)->getLugarPista();
-		if (ultimo < lugar)
-		{
-			ultimo = lugar;
-		}
-	}
-	return ultimo;
-}
-*/
 void Campeonato::setNumero_corrida(int num)
 {
 	numero_corrida = num;
@@ -159,6 +145,16 @@ void Campeonato::preparaCorrida()
 
 void Campeonato::lancaCorrida()
 {
+	int count;
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+	{
+		count++;
+	}
+	if (count < 2)
+	{
+		cout << "[ERRO] A Corrida nao pode comecar, nao exitem pelo menos 2 participantes!!!" << endl;
+		//falta verificar isto
+	}
 	setCorridaDecorrer(true);
 	cout << "Corrida no Autodromo: " << autodromos_campeonato[numero_corrida]->getNome() << " (" << autodromos_campeonato[numero_corrida]->getComp() << ")" << endl;
 	cout << "Pares participantes: " << endl;
@@ -168,17 +164,12 @@ void Campeonato::lancaCorrida()
 	}
 }
 
-/*int Campeonato::inicio()
-{
-	int start;
-	start = rand() %1 + 5;
-	return start;
-}
 
 void Campeonato::Lugar(int pos)
 {
 	int lugar;
 	int ultimo;
+	int last;
 	last = getUltimo();
 	lugar = pares_campeonato[pos]->getLugarPista();
 	if (lugar == 1)
@@ -191,7 +182,7 @@ void Campeonato::Lugar(int pos)
 		if (lugar == last)
 		{
 			pares_campeonato[pos]->setAcelerador(false);
-			pares_campeonato[pos]->setAcelereador(true);
+			pares_campeonato[pos]->setAcelerador(true);
 		}
 		else
 		{
@@ -201,6 +192,20 @@ void Campeonato::Lugar(int pos)
 	}
 }
 
+int Campeonato::getUltimo()
+{
+	int lugar = 0, ultimo = 0;
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++);
+	{
+		lugar = (*it)->getLugarPista();
+		if (ultimo < lugar)
+		{
+			ultimo = lugar;
+		}
+	}
+	return ultimo;
+}
+/*
 void Campeonato::Perdeulugares()
 {
 
@@ -381,11 +386,17 @@ void Campeonato::passatempo(int seg)
 	int vel;
 	float enat;
 	float enlost;
+	int lugarp;
+	int vel2;
 	comp = autodromos_campeonato[numero_corrida]->getComp();
 	for (int i = 1; i <= seg; i++)
 	{
 		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 		{
+			if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver") // ve a posicao anterior  nao sei se esta bem
+			{
+				lugarp = (*it)->getLugarPista();
+			}
 			tempo_atual = (*it)->getTempo();
 			pos = (*it)->getPosicao();
 			if (pos < comp)
@@ -437,7 +448,22 @@ void Campeonato::passatempo(int seg)
 					{
 						if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver")
 						{
+							Lugar(pos);
+							 //falta Se perdeu lugares desde o segundo anterior pisa o acelerador de forma a aumentar a sua velocidade 2m/s
+							if (lugarp > (*it)->getLugarPista() && vel2 == ((*it)->getVelocidade() + 2))
+							{
+								(*it)->setAcelerador(true);
+								vel2 = (*it)->getVelocidade();
+							}
 
+							if ((*it)->getCarro()->getEnergia_atual() == 0)
+							{
+								(*it)->setSinal(true);
+							}
+							if (rand() % 100 == 5)
+							{
+								(*it)->getCarro()->setAvariado(true);
+							}
 						}
 					}
 					if (enat > 0)

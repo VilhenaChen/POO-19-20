@@ -45,9 +45,9 @@ public:
 
 	//Driver Personallity
 	//Crazy Driver
-	/*int inicio();
 	void Lugar(int pos);
-	//int getUltimo();
+	int getUltimo();
+	/*
 	void Perdeulugares();
 	void SemBat(int pos);
 	void probAcidente();
@@ -73,6 +73,7 @@ public:
 
 	//verify
 	bool verificaSeJaTodosAcabaram();
+
 	//Points
 	void atribuiPontos();
 
