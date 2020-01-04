@@ -116,7 +116,7 @@ void Campeonato::setClassificacaoCorrida()
 					lugant = (*it)->getLugarPista();
 					(*it)->setLugarPista(lugar);
 					cont++;
-					if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver")
+					if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "Crazy Driver")
 					{
 						if (lugant < lugar && (*it)->getAcelerador()==false)
 						{
@@ -171,6 +171,7 @@ void Campeonato::setClassificacaoCampeonato()
 
 void Campeonato::preparaCorrida()
 {
+	int inicor;
 	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 	{
 		(*it)->setPosicao(0);
@@ -180,6 +181,11 @@ void Campeonato::preparaCorrida()
 		(*it)->setVelocidade(1);
 		(*it)->setTerminouCorrida(false);
 		(*it)->setSegacel(0);
+		if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver" || (*it)->getPiloto()->getPersonalidade() == "Piloto Surpresa") 
+		{
+			inicor = (rand() % 5) + 1;
+			(*it)->setInicorrida(inicor);
+		}
 	}
 }
 
@@ -431,19 +437,27 @@ void Campeonato::passatempo(int seg)
 	{
 		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 		{
+			if (rand() % 100 < 50)
+			{
+				(*it)->getPiloto()->setPersonalidadeTemporaria("Crazy Driver");
+			}
+			else 
+			{
+				(*it)->getPiloto()->setPersonalidadeTemporaria("Piloto Rapido");
+			}
 			tempo_atual = (*it)->getTempo();
 			pos = (*it)->getPosicao();
 			if (pos < comp)
 			{
 				tempo = tempo_atual + 1;
 				(*it)->setTempo(tempo);
-				if ((*it)->getPiloto()->getPersonalidade() != "Crazy Driver" || ((*it)->getPiloto()->getPersonalidade()=="Crazy Driver" && (*it)->getInicorrida()<=tempo_atual))
+				if (((*it)->getPiloto()->getPersonalidade() != "Crazy Driver" && (*it)->getPiloto()->getPersonalidadeTemporaria() != "Crazy Driver") || (((*it)->getPiloto()->getPersonalidade()=="Crazy Driver" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "Crazy Driver") && (*it)->getInicorrida()<=tempo_atual))
 				{
 					pos = (((*it)->getVelocidade()) * ((*it)->getTempo()));
 					(*it)->setPosicao(pos);
 					enat = (*it)->getCarro()->getEnergia_atual();
 
-					if ((*it)->getPiloto()->getPersonalidade() == "Piloto Rapido")
+					if ((*it)->getPiloto()->getPersonalidade() == "Piloto Rapido" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "Piloto Rapido")
 					{
 						if (enat < (((*it)->getCarro()->getEnergia_max()) / 2.0))
 						{
@@ -468,7 +482,7 @@ void Campeonato::passatempo(int seg)
 									(*it)->setSegsemacel(tempsemacel);
 								}
 							}
-							if (rand() % 100 == 10)
+							if (rand() % 100 < 10)
 							{
 								(*it)->setSinal(true);
 							}
@@ -502,11 +516,11 @@ void Campeonato::passatempo(int seg)
 		setClassificacaoCorrida();
 		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 		{
-			if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver") // ve a posicao anterior  nao sei se esta bem
+			if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "Crazy Driver")
 			{
 				lugarp = (*it)->getLugarPista();
 				Lugar((*it));
-				if (rand() % 100 == 5)
+				if (rand() % 100 < 5)
 				{
 					(*it)->getCarro()->setAvariado(true);
 				}
