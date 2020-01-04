@@ -28,8 +28,10 @@ public:
 	int getNumero_corrida();
 	bool getCorridaDecorrer();
 	int getTotalvetor();
+	int getTamAutodromos();
 	char getIDCarro(int posicao);
 	Carro* getCarro(char idcarro);
+	int getMaxPontos();
 
 	//set
 	void setNumero_corrida(int num);
@@ -70,9 +72,11 @@ public:
 
 	//show
 	void mostraInformacaoCorrridaOrganizada();
+	void mostraClassificacaoCampeonatoOrganizada();
 
 	//verify
 	bool verificaSeJaTodosAcabaram();
+	bool verificaSeCampeonatoAcabou();
 
 	//Points
 	void atribuiPontos();

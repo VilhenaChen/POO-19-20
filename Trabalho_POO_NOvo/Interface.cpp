@@ -350,6 +350,11 @@ bool Interface::menu_campeonato()
 									if (campea.verificaSeJaTodosAcabaram() == true) 
 									{
 										campea.acabaCorrida();
+										if (campea.verificaSeCampeonatoAcabou() == true) 
+										{
+											campea.setClassificacaoCampeonato();
+											campea.mostraClassificacaoCampeonatoOrganizada();
+										}
 									}
 								}
 								else
@@ -361,7 +366,6 @@ bool Interface::menu_campeonato()
 									else
 									{
 										cout << "Comando Invalido!!!" << endl;
-										return false;
 									}
 								}
 							}

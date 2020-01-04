@@ -59,6 +59,16 @@ int Campeonato::getTotalvetor()
 	return total;
 }
 
+int Campeonato::getTamAutodromos()
+{
+	int cont = 0;
+	for (auto it = autodromos_campeonato.begin(); it < autodromos_campeonato.end(); it++) 
+	{
+		cont++;
+	}
+	return cont;
+}
+
 char Campeonato::getIDCarro(int posicao)
 {
 	char id;
@@ -76,6 +86,19 @@ Carro* Campeonato::getCarro(char idcarro)
 		}
 	}
 	return nullptr;
+}
+
+int Campeonato::getMaxPontos()
+{
+	int max = 0;
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++) 
+	{
+		if ((*it)->getPontos() > max) 
+		{
+			max = (*it)->getPontos();
+		}
+	}
+	return max;
 }
 
 void Campeonato::setNumero_corrida(int num)
@@ -166,7 +189,22 @@ void Campeonato::setClassificacaoCorrida()
 
 void Campeonato::setClassificacaoCampeonato()
 {
-
+	int lugar;
+	int cont = 0;
+	int points = 0;
+	points= getMaxPontos();
+	for (int i = points; i > 0 ; i--)
+	{
+		lugar = cont + 1;
+		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+		{
+			if (i == (*it)->getPontos())
+			{
+				(*it)->setLugarCampeonato(lugar);
+				cont++;
+			}
+		}
+	}
 }
 
 void Campeonato::preparaCorrida()
@@ -345,23 +383,46 @@ void Campeonato::acabaCorrida()
 	atribuiPontos();
 	setCorridaDecorrer(false);
 	numero_corrida++;
-
 }
 
 void Campeonato::mostraInformacaoCorrridaOrganizada()
 {
-cout << "Informacao sobre a corrida no autodromo " << autodromos_campeonato[numero_corrida]->getNome() << " (" << autodromos_campeonato[numero_corrida]->getComp() << " m) :" << endl;
-for (int i = 1; i < pares_campeonato.size(); i++)
-{
-	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+	cout << "Informacao sobre a corrida no autodromo " << autodromos_campeonato[numero_corrida]->getNome() << " (" << autodromos_campeonato[numero_corrida]->getComp() << " m) :" << endl;
+	for (int i = 1; i < pares_campeonato.size(); i++)
 	{
-		if (i == (*it)->getLugarPista())
+		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 		{
-			cout << i << ". " << (*it)->getCarro()->getId_carro() << " " << (*it)->getCarro()->getMarca() << " / " << (*it)->getPiloto()->getNome() << " ( " << (*it)->getPiloto()->getPersonalidade() << ") - " << (*it)->getCarro()->getEnergia_atual() << "mAh, " << (*it)->getCarro()->getEnergia_max() << "mAh - " << (*it)->getPosicao() << "m - " << (*it)->getVelocidade() << "m/s" << endl;
+			if (i == (*it)->getLugarPista())
+			{
+				cout << i << ". " << (*it)->getCarro()->getId_carro() << " " << (*it)->getCarro()->getMarca() << " / " << (*it)->getPiloto()->getNome() << " ( " << (*it)->getPiloto()->getPersonalidade() << ") - " << (*it)->getCarro()->getEnergia_atual() << "mAh, " << (*it)->getCarro()->getEnergia_max() << "mAh - " << (*it)->getPosicao() << "m - " << (*it)->getVelocidade() << "m/s" << endl;
+			}
 		}
-	}
 
+	}
 }
+
+void Campeonato::mostraClassificacaoCampeonatoOrganizada()
+{
+	cout << "Vencedores Campeonato"<< endl;
+	for (int i = 1; i <= 2; i++)
+	{
+		if (i == 1)
+		{
+			cout << "Campeao/Campeoes:" << endl;
+		}
+		else
+		{
+			cout << "Vice-Campeao/Vice-Campeoes:" << endl;
+		}
+		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
+		{
+			if (i == (*it)->getLugarCampeonato())
+			{
+				cout << (*it)->getCarro()->getId_carro() << " " << (*it)->getCarro()->getMarca() << " / " << (*it)->getPiloto()->getNome() << " ( " << (*it)->getPiloto()->getPersonalidade() << ") - " << (*it)->getPontos() << " pontos " << endl;
+			}
+		}
+
+	}
 }
 
 bool Campeonato::verificaSeJaTodosAcabaram()
@@ -374,6 +435,18 @@ bool Campeonato::verificaSeJaTodosAcabaram()
 		}
 	}
 	return true;
+}
+
+bool Campeonato::verificaSeCampeonatoAcabou()
+{
+	if (numero_corrida == getTamAutodromos()) 
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Campeonato::atribuiPontos()
