@@ -45,7 +45,7 @@ public:
 
 	//Driver Personallity
 	//Crazy Driver
-	void Lugar(int pos);
+	void Lugar(Par_Campeonato* par);
 	int getUltimo();
 	/*
 	void Perdeulugares();
@@ -79,10 +79,6 @@ public:
 
 	//Destroy
 	void destroi(char idcarro);
-
-	/*//Crazy Driver
-	void lugar(int pos);
-	int Inicio();*/
 
 
 

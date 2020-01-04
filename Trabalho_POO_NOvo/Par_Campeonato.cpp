@@ -165,7 +165,7 @@ void Par_Campeonato::aumentaVelocidade()
 	int vel, max;
 	vel = getVelocidade();
 	max = getCarro()->getVelocidade_max();
-	if (getAcelerador() == true && vez < max)
+	if (getAcelerador() == true && vel < max)
 	{
 		setVelocidade(vel + 1);
 	}
