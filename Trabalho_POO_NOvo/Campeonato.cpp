@@ -392,60 +392,71 @@ void Campeonato::passatempo(int seg)
 			{
 				tempo = tempo_atual + 1;
 				(*it)->setTempo(tempo);
-				pos = (((*it)->getVelocidade()) * ((*it)->getTempo()));
-				(*it)->setPosicao(pos);
-				enat = (*it)->getCarro()->getEnergia_atual();
-				if ((*it)->getPiloto()->getPersonalidade() == "Piloto Rapido")
+				if ((*it)->getPiloto()->getPersonalidade() != "Crazy Driver" || ((*it)->getPiloto()->getPersonalidade()=="Crazy Driver" && (*it)->getInicorrida()<=tempo_atual))
 				{
-					if (enat < (((*it)->getCarro()->getEnergia_max) / 2))
+					pos = (((*it)->getVelocidade()) * ((*it)->getTempo()));
+					(*it)->setPosicao(pos);
+					enat = (*it)->getCarro()->getEnergia_atual();
+
+					if ((*it)->getPiloto()->getPersonalidade() == "Piloto Rapido")
 					{
-						if ((*it)->getAcelerador() == false && (*it)->getSegsemacel() == 3)
-						{   
+						if (enat < (((*it)->getCarro()->getEnergia_max) / 2))
+						{
+							if ((*it)->getAcelerador() == false && (*it)->getSegsemacel() == 3)
+							{
+								(*it)->setAcelerador(true);
+								(*it)->setSegsemacel(0);
+							}
+							else
+							{
+								if ((*it)->getAcelerador() == true)
+								{
+									(*it)->setAcelerador(false);
+									tempsemacel = (*it)->getSegsemacel();
+									tempsemacel++;
+									(*it)->setSegsemacel(tempsemacel);
+								}
+								else
+								{
+									tempsemacel = (*it)->getSegsemacel();
+									tempsemacel++;
+									(*it)->setSegsemacel(tempsemacel);
+								}
+							}
+							if (rand() % 100 == 10)
+							{
+								(*it)->setSinal(true);
+							}
+						}
+						else
+						{
 							(*it)->setAcelerador(true);
-							(*it)->setSegsemacel(0);
 						}
-						else 
+					}
+					else
+					{
+						if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver")
 						{
-							if ((*it)->getAcelerador() == true) 
-							{
-								(*it)->setAcelerador(false);
-								tempsemacel = (*it)->getSegsemacel();
-								tempsemacel++;
-								(*it)->setSegsemacel(tempsemacel);
-							}
-							else 
-							{
-								tempsemacel = (*it)->getSegsemacel();
-								tempsemacel++;
-								(*it)->setSegsemacel(tempsemacel);
-							}
+
 						}
-						if (rand() % 100 == 10)
+					}
+					if (enat > 0)
+					{
+						enlost = enat - 0.1;
+						(*it)->getCarro()->setEnergia_atual(enlost);
+					}
+					else
+					{
+						(*it)->setSinal(true);
+						if ((*it)->getVelocidade() > 0)
 						{
-							(*it)->setSinal(true);
+							vel = (*it)->getVelocidade();
+							(*it)->setVelocidade(vel - 1);
 						}
-					}
-					else 
-					{
-						(*it)->setAcelerador(true);
-					}
-				}
-				if (enat > 0)
-				{
-					enlost = enat - 0.1;
-					(*it)->getCarro()->setEnergia_atual(enlost);
-				}
-				else
-				{
-					(*it)->setSinal(true);
-					if ((*it)->getVelocidade() > 0)
-					{
-						vel = (*it)->getVelocidade();
-						(*it)->setVelocidade( vel - 1);
-					}
-					else 
-					{
-						autodromos_campeonato[numero_corrida]->addParGaragem((*it));
+						else
+						{
+							autodromos_campeonato[numero_corrida]->addParGaragem((*it));
+						}
 					}
 				}
 			}

@@ -12,6 +12,7 @@ class Par_Campeonato
 	bool terminou_corrida=false;
 	int segacel  = 0;
 	int segsemacel = 0;
+	int inicorrida = 0;
 	Carro* carro_par;
 	Piloto* piloto_par;
 
@@ -35,6 +36,7 @@ public:
 	bool getTerminouCorrida();
 	int getSegacel();
 	int getSegsemacel();
+	int getInicorrida();
 
 	//set
 	void setPosicao(int pos);
@@ -51,6 +53,7 @@ public:
 	void setTerminouCorrida(bool term);
 	void setSegacel(int seg);
 	void setSegsemacel(int seg);
+	void setInicorrida(int seg);
 	
 	//Change Speed
 	void aumentaVelocidade();

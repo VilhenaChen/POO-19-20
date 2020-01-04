@@ -80,6 +80,11 @@ int Par_Campeonato::getSegsemacel()
 	return segsemacel;
 }
 
+int Par_Campeonato::getInicorrida()
+{
+	return inicorrida;
+}
+
 void Par_Campeonato::setPosicao(int pos)
 {
 	posicao_pista = pos;
@@ -150,13 +155,23 @@ void Par_Campeonato::setSegsemacel(int seg)
 	segsemacel = seg;
 }
 
+void Par_Campeonato::setInicorrida(int seg)
+{
+	inicorrida = seg;
+}
+
 void Par_Campeonato::aumentaVelocidade()
 {
-	int vel;
+	int vel, max;
 	vel = getVelocidade();
-	if (getAcelerador() == true)
+	max = getCarro()->getVelocidade_max();
+	if (getAcelerador() == true && vez < max)
 	{
 		setVelocidade(vel + 1);
+	}
+	if (vel = max)
+	{
+		setAcelerador(false);
 	}
 }
 
@@ -164,7 +179,7 @@ void Par_Campeonato::diminuiVelocidade()
 {
 	int vel;
 	vel = getVelocidade();
-	if (getTravao() == true)
+	if (getTravao() == true && vel > 0)
 	{
 		setVelocidade(vel - 1);
 	}
