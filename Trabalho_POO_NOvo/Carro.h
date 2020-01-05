@@ -15,7 +15,7 @@ class Carro
 
 public:
 	Carro(char idc, float ea, float em, string brand, string model) : id_carro(idc), energia_atual(ea), energia_max(em), marca(brand), modelo(model){}
-
+	//Carro(const Carro& copycar);
 	//gets
 	string getMarca();
 	string getModelo();

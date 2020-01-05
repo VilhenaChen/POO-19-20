@@ -1,4 +1,5 @@
 #include "Campeonato.h"
+#include "Consola.h"
 
 void Campeonato::addAutodromoCampeonato(Autodromo* autod)
 {
@@ -119,7 +120,7 @@ void Campeonato::setClassificacaoCorrida()
 	int lugant;
 	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 	{
-		if ((*it)->getTerminouCorrida() == true) 
+		if ((*it)->getTerminouCorrida() == true && (*it)->getCarro()->getAvariado() == false && (*it)->getSaiucorrida() == false)
 		{
 			if (lugar <= (*it)->getLugarPista())
 			{
@@ -139,7 +140,7 @@ void Campeonato::setClassificacaoCorrida()
 					lugant = (*it)->getLugarPista();
 					(*it)->setLugarPista(lugar);
 					cont++;
-					if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "Crazy Driver")
+					if ((*it)->getPiloto()->getPersonalidade() == "crazy" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "crazy")
 					{
 						if (lugant < lugar && (*it)->getAcelerador()==false)
 						{
@@ -218,8 +219,9 @@ void Campeonato::preparaCorrida()
 		(*it)->setTempo(0);
 		(*it)->setVelocidade(1);
 		(*it)->setTerminouCorrida(false);
+		(*it)->setSaiucorrida(false);
 		(*it)->setSegacel(0);
-		if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver" || (*it)->getPiloto()->getPersonalidade() == "Piloto Surpresa") 
+		if ((*it)->getPiloto()->getPersonalidade() == "crazy" || (*it)->getPiloto()->getPersonalidade() == "surpresa") 
 		{
 			inicor = (rand() % 5) + 1;
 			(*it)->setInicorrida(inicor);
@@ -232,7 +234,10 @@ void Campeonato::lancaCorrida()
 	int count=0;
 	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 	{
-		count++;
+		if ((*it)->getCarro()->getAvariado() == false)
+		{
+			count++;
+		}
 	}
 	if (count < 2)
 	{
@@ -241,11 +246,7 @@ void Campeonato::lancaCorrida()
 	}
 	setCorridaDecorrer(true);
 	cout << "Corrida no Autodromo: " << autodromos_campeonato[numero_corrida]->getNome() << " (" << autodromos_campeonato[numero_corrida]->getComp() << ")" << endl;
-	cout << "Pares participantes: " << endl;
-	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
-	{
-		cout << "Nome: " <<(*it)->getPiloto()->getNome()<<" ID Carro: "<<(*it)->getCarro()->getId_carro()<< " Tempo: " << (*it)->getTempo()<<endl;
-	}
+	mostraInformacaoCorrridaOrganizada();
 }
 
 
@@ -288,22 +289,7 @@ int Campeonato::getUltimo()
 	}
 	return ultimo;
 }
-/*
-void Campeonato::Perdeulugares()
-{
 
-}
-
-void Campeonato::SemBat(int pos)
-{
-	pares_campeonato[pos]->setSinal(true);
-}
-
-void Campeonato::probAcidente()
-{
-
-}
-*/
 void Campeonato::carregaAllBat()
 {
 	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
@@ -387,17 +373,22 @@ void Campeonato::acabaCorrida()
 
 void Campeonato::mostraInformacaoCorrridaOrganizada()
 {
-	cout << "Informacao sobre a corrida no autodromo " << autodromos_campeonato[numero_corrida]->getNome() << " (" << autodromos_campeonato[numero_corrida]->getComp() << " m) :" << endl;
-	for (int i = 1; i < pares_campeonato.size(); i++)
+	Consola::clrscr();
+	Consola::setScreenSize(100, 100);
+	int x = 70;
+	int y = 4;
+	for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 	{
-		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
-		{
-			if (i == (*it)->getLugarPista())
-			{
-				cout << i << ". " << (*it)->getCarro()->getId_carro() << " " << (*it)->getCarro()->getMarca() << " / " << (*it)->getPiloto()->getNome() << " ( " << (*it)->getPiloto()->getPersonalidade() << ") - " << (*it)->getCarro()->getEnergia_atual() << "mAh, " << (*it)->getCarro()->getEnergia_max() << "mAh - " << (*it)->getPosicao() << "m - " << (*it)->getVelocidade() << "m/s" << endl;
-			}
-		}
-
+		char id;
+		id = (*it)->getCarro()->getId_carro();
+		Consola::gotoxy(10, y);
+		cout << (*it)->getCarro()->getId_carro() << " " << (*it)->getCarro()->getMarca() << " / " << (*it)->getPiloto()->getNome() << " ( " << (*it)->getPiloto()->getPersonalidade() << ") - " << (*it)->getCarro()->getEnergia_atual() << "mAh, " << (*it)->getCarro()->getEnergia_max() << "mAh - " << (*it)->getPosicao() << "m - " << (*it)->getVelocidade() << "m/s" << endl;
+		Consola::gotoxy(x, y);
+		cout << id;
+		Consola::gotoxy(x, y);
+		y++;
+		cout << "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
+		y = y + 3;
 	}
 }
 
@@ -512,11 +503,11 @@ void Campeonato::passatempo(int seg)
 		{
 			if (rand() % 100 < 50)
 			{
-				(*it)->getPiloto()->setPersonalidadeTemporaria("Crazy Driver");
+				(*it)->getPiloto()->setPersonalidadeTemporaria("crazy");
 			}
 			else 
 			{
-				(*it)->getPiloto()->setPersonalidadeTemporaria("Piloto Rapido");
+				(*it)->getPiloto()->setPersonalidadeTemporaria("rapido");
 			}
 			tempo_atual = (*it)->getTempo();
 			pos = (*it)->getPosicao();
@@ -524,13 +515,13 @@ void Campeonato::passatempo(int seg)
 			{
 				tempo = tempo_atual + 1;
 				(*it)->setTempo(tempo);
-				if (((*it)->getPiloto()->getPersonalidade() != "Crazy Driver" && (*it)->getPiloto()->getPersonalidadeTemporaria() != "Crazy Driver") || (((*it)->getPiloto()->getPersonalidade()=="Crazy Driver" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "Crazy Driver") && (*it)->getInicorrida()<=tempo_atual))
+				if (((*it)->getPiloto()->getPersonalidade() != "crazy" && (*it)->getPiloto()->getPersonalidadeTemporaria() != "crazy") || (((*it)->getPiloto()->getPersonalidade()=="crazy" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "crazy") && (*it)->getInicorrida()<=tempo_atual))
 				{
 					pos = (((*it)->getVelocidade()) * ((*it)->getTempo()));
 					(*it)->setPosicao(pos);
 					enat = (*it)->getCarro()->getEnergia_atual();
 
-					if ((*it)->getPiloto()->getPersonalidade() == "Piloto Rapido" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "Piloto Rapido")
+					if ((*it)->getPiloto()->getPersonalidade() == "rapido" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "rapido")
 					{
 						if (enat < (((*it)->getCarro()->getEnergia_max()) / 2.0))
 						{
@@ -589,7 +580,7 @@ void Campeonato::passatempo(int seg)
 		setClassificacaoCorrida();
 		for (auto it = pares_campeonato.begin(); it < pares_campeonato.end(); it++)
 		{
-			if ((*it)->getPiloto()->getPersonalidade() == "Crazy Driver" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "Crazy Driver")
+			if ((*it)->getPiloto()->getPersonalidade() == "crazy" || (*it)->getPiloto()->getPersonalidadeTemporaria() == "crazy")
 			{
 				lugarp = (*it)->getLugarPista();
 				Lugar((*it));
@@ -606,7 +597,7 @@ void Campeonato::passatempo(int seg)
 			if ((*it)->getTravao() == true)
 				(*it)->diminuiVelocidade();
 			if ((*it)->getSinal() == true)
-				(*it)->setTravao(true); //Isto depois tem d ter mais verificacoes se calhar mas para ja fica assim okapa
+				(*it)->setTravao(true);
 			if ((*it)->getCarro()->getAvariado() == true)
 				(*it)->getCarro()->setEnergia_atual(0);
 		}

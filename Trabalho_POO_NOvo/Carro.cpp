@@ -1,5 +1,16 @@
 #include "Carro.h"
 
+/*Carro::Carro(const Carro& copycar)
+{
+	id_carro = copycar.id_carro;
+	energia_atual = copycar.energia_atual;
+	energia_max = copycar.energia_max;
+	marca = copycar.marca;
+	modelo = copycar.modelo;
+	velocidade_max = copycar.velocidade_max;
+	avariado = copycar.avariado;
+}*/
+
 string Carro::getMarca()
 {
 	return marca;

@@ -14,11 +14,13 @@ class DGV
 	vector <Piloto*> vetor_pilotos;
 
 public:
+	DGV() {}
+	DGV(const DGV& copy);
 	//add
 	void addCarro(float ener_atual, float ener_max, string brand, string model="Modelo Base");
-	void addPiloto(string nome, string personalidade = "Generico");
+	void addPiloto(string nome, string personalidade);
 
-	//erase
+	
 
 	//find
 	char findNextID();
@@ -26,7 +28,9 @@ public:
 
 	//get
 	Piloto* getPilotoSegundoPosicaoNoVetor(int posi);
+	Carro* getCarroSegundoPosicaoNoVetor(int posi);
 	size_t getTamVetorPilotos();
+	size_t getTamVetorCarros();
 
 	//read from file
 	bool leFicheiroCarros(string nome_ficheiro);
@@ -45,7 +49,8 @@ public:
 
 	virtual ~DGV() 
 	{
-		for (int i = 0; i < vetor_carros.size(); i++)
+		for (auto it=vetor_carros.begin(); it < vetor_carros.end(); it++)
+			vetor_carros.erase((*it));
 			delete vetor_carros[i];
 		for (int j = 0; j < vetor_pilotos.size(); j++)
 			delete vetor_pilotos[j];

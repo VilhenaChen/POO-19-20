@@ -45,17 +45,12 @@ public:
 	//Launch
 	void lancaCorrida();
 
+	//Display
+
 	//Driver Personallity
 	//Crazy Driver
 	void Lugar(Par_Campeonato* par);
 	int getUltimo();
-	/*
-	void Perdeulugares();
-	void SemBat(int pos);
-	void probAcidente();
-	*/
-
-	//Fast Driver
 
 	//Charge
 	void carregaAllBat();

@@ -22,12 +22,10 @@ bool Autodromos::leFicheiroAutodromos(string nome_ficheiro)
 			iss >> num_car;
 			iss >> com;
 			iss >> nome;
-			while (iss >> aux) 
+			if (stoi(num_car) > 0 && stoi(com))
 			{
-				nome = nome + espaco;
-				nome = nome + aux;
+				this->addAutodromo(stoi(num_car), stoi(com), nome);
 			}
-			this->addAutodromo(stoi(num_car), stoi(com), nome);
 		}
 		f.close();
 		return true;

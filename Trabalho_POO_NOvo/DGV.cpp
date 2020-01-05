@@ -2,6 +2,37 @@
 #include <iostream>
 #include <string>
 
+
+DGV::DGV(const DGV& copy)
+{
+	for (auto it = copy.vetor_carros.begin(); it<copy.vetor_carros.end();it++) 
+	{
+		vetor_carros.push_back(new Carro((*it)->getId_carro(), (*it)->getEnergia_atual(), (*it)->getEnergia_max(), (*it)->getMarca(),(*it)->getModelo()));
+	}
+	for (auto it = copy.vetor_pilotos.begin(); it < copy.vetor_pilotos.end(); it++)
+	{
+		vetor_pilotos.push_back(new Piloto((*it)->getNome(),(*it)->getPersonalidade()));
+	}
+	for (auto itc = copy.vetor_carros.begin(); itc < copy.vetor_carros.end(); itc++)
+	{
+		for (auto it = vetor_carros.begin(); it < copy.vetor_carros.end(); it++)
+		{
+			if ((*it)->getId_carro() == (*itc)->getId_carro()) 
+			{
+				for (auto itpc = vetor_pilotos.begin(); itpc < vetor_pilotos.end(); itpc++)
+				{
+					if ((*itpc)->getNome() == (*itc)->getPilotoPar()->getNome()) 
+					{
+						(*it)->setPilotoPar((*itpc));
+						(*itpc)->setCarroPar((*it));
+					}
+				}
+			}
+
+		}
+	}
+}
+
 void DGV::addCarro(float ener_atual, float ener_max, string brand, string model)
 {
 	char id = this->findNextID();
@@ -11,7 +42,7 @@ void DGV::addCarro(float ener_atual, float ener_max, string brand, string model)
 void DGV::addPiloto(string nome, string personalidade)
 {
 	string novo_nome = this->findNextNamePiloto(nome);
-	vetor_pilotos.push_back(new Piloto(novo_nome));
+	vetor_pilotos.push_back(new Piloto(novo_nome, personalidade));
 }
 
 char DGV::findNextID()
@@ -66,9 +97,20 @@ Piloto* DGV::getPilotoSegundoPosicaoNoVetor(int posi)
 	return vetor_pilotos[posi];
 }
 
+Carro* DGV::getCarroSegundoPosicaoNoVetor(int posi)
+{
+	return vetor_carros[posi];
+}
+
 size_t DGV::getTamVetorPilotos()
 {
 	size_t tam=vetor_pilotos.size();
+	return tam;
+}
+
+size_t DGV::getTamVetorCarros()
+{
+	size_t tam = vetor_pilotos.size();
 	return tam;
 }
 
@@ -95,7 +137,10 @@ bool DGV::leFicheiroCarros(string nome_ficheiro)
 				mod = mod + espaco;
 				mod = mod + aux;
 			}
-			this->addCarro(stof(en_at), stof(en_max), marc, mod);
+			if (stof(en_at) > 0 && (stof(en_max) > stof(en_at)))
+			{
+				this->addCarro(stof(en_at), stof(en_max), marc, mod);
+			}
 		}
 		f.close();
 		return true;
@@ -108,20 +153,23 @@ bool DGV::leFicheiroPilotos(string nome_ficheiro)
 	ifstream f(nome_ficheiro);
 	string linha;
 	string espaco = " ";
-	string nome, aux, lixo;
+	string nome, aux, genero;
 	if (f.is_open()) {
 		while (getline(f, linha))
 		{
 			nome.clear();
 			istringstream iss(linha);
-			iss >> lixo;
+			iss >> genero;
 			iss >> nome;
 			while (iss >> aux)
 			{
 				nome = nome + espaco;
 				nome = nome + aux;
 			}
-			this->addPiloto(nome);
+			if (genero == "crazy" || genero == "rapido" || genero == "surpresa")
+			{
+				this->addPiloto(nome, genero);
+			}
 		}
 		f.close();
 		return true;
@@ -147,7 +195,7 @@ void DGV::entraNoCarro(char let_car, string name_pil)
 						{
 							(*ita)->setPilotoPar(*itb);
 							(*itb)->setCarroPar(*ita);
-							cout << "O piloto" << (*ita)->getPilotoPar()->getNome() << "foi inserido no carro: " << (*itb)->getCarroPar()->getId_carro() << endl;
+							cout << "O piloto " << (*ita)->getPilotoPar()->getNome() << " foi inserido no carro: " << (*itb)->getCarroPar()->getId_carro() << endl;
 							return;
 						}
 						else

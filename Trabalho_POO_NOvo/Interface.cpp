@@ -17,6 +17,9 @@ bool Interface::menu_inicial()
 	cout << "entranocarro <letraCarro> <nomePiloto>" << endl;
 	cout << "saidocarro <letraCarro>" << endl;
 	cout << "lista" << endl;
+	cout << "savedgv <nome>" << endl;
+	cout <<"loaddgv <nome>" << endl;
+	cout << "deldgv <nome>" << endl;
 	cout << "campeonato <A1> <A2> ... <An>" << endl;
 	cout << endl;
 	cout << "Insira um comando: ";
@@ -28,22 +31,24 @@ bool Interface::menu_inicial()
 	k++;
 	string tipo;
 	string en_max, en_at;
-	en_max.empty();
-	en_at.empty();
+	en_max.clear();
+	en_at.clear();
 	string marca;
-	marca.empty();
+	marca.clear();
 	string modelo;
-	modelo.empty();
+	modelo.clear();
 	string name_pil;
-	name_pil.empty();
+	name_pil.clear();
 	string genero_pil;
-	genero_pil.empty();
+	genero_pil.clear();
 	string name_aut, maximoC, comprim;
-	name_aut.empty();
-	maximoC.empty();
-	comprim.empty();
+	name_aut.clear();
+	maximoC.clear();
+	comprim.clear();
 	string letr_car;
-	letr_car.empty();
+	letr_car.clear();
+	string name_dgv;
+	name_dgv.clear();
 	string espaco = " ";
 	if (com == "carregaP" && k < vet_var_comando.size())
 	{
@@ -110,6 +115,11 @@ bool Interface::menu_inicial()
 						{
 							genero_pil = vet_var_comando[k];
 							k++;
+							if (genero_pil != "crazy" && genero_pil != "rapido" && genero_pil != "surpresa")
+							{
+								cout << "[ERRO] O genero tem de ser um dos seguintes: crazy, rapido, surpresa!!!" << endl;
+								return true;
+							}
 							name_pil = vet_var_comando[k];
 							k++;
 							for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
@@ -117,7 +127,7 @@ bool Interface::menu_inicial()
 								name_pil = name_pil + espaco;
 								name_pil = name_pil + vet_var_comando[i];
 							}
-							dgva.addPiloto(name_pil);
+							dgva.addPiloto(name_pil,genero_pil);
 						}
 						else
 						{
@@ -140,11 +150,6 @@ bool Interface::menu_inicial()
 								}
 								name_aut = vet_var_comando[k];
 								k++;
-								for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
-								{
-									name_aut = name_aut + espaco;
-									name_aut = name_aut + vet_var_comando[i];
-								}
 								autoa.addAutodromo(stoi(maximoC), stoi(comprim), name_aut);
 							}
 						}
@@ -224,19 +229,44 @@ bool Interface::menu_inicial()
 								}
 								else
 								{
-									if (com == "campeonato")
+									if (com == "savedgv")
 									{
-										for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
-										{
-											string autos;
-											autos = vet_var_comando[i];
-											this->addAutodromoCampeonato(autos);
-										}
-										return false;
+										name_dgv = vet_var_comando[k];
+										k++;
 									}
 									else
 									{
-										cout << "Comando Invalido!!!" << endl;
+										if (com == "loaddgv")
+										{
+											name_dgv = vet_var_comando[k];
+											k++;
+										}
+										else
+										{
+											if (com == "deldvg")
+											{
+												name_dgv = vet_var_comando[k];
+												k++;
+											}
+											else
+											{
+												if (com == "campeonato")
+												{
+													for (unsigned int i = k; i < vet_var_comando.size(); i++, k++)
+												{
+													string autos;
+													autos = vet_var_comando[i];
+													this->addAutodromoCampeonato(autos);
+												}
+												return false;
+												}
+												else
+												{
+													cout << "Comando Invalido!!!" << endl;
+												}
+											}
+										}
+										
 									}
 								}
 							}
@@ -277,12 +307,12 @@ bool Interface::menu_campeonato()
 	k++;
 	string segundos;
 	string energia;
-	segundos.empty();
-	energia.empty();
+	segundos.clear();
+	energia.clear();
 	string letr_car;
-	letr_car.empty();
+	letr_car.clear();
 	string nome_piloto;
-	nome_piloto.empty();
+	nome_piloto.clear();
 	Carro* pcarro;
 	if (com == "listacarros")
 	{
@@ -311,6 +341,7 @@ bool Interface::menu_campeonato()
 				{
 					campea.preparaCorrida();
 					campea.lancaCorrida();
+
 				}
 				else
 				{
@@ -378,24 +409,6 @@ bool Interface::menu_campeonato()
 	return true;
 }
 
-bool Interface::interface_grafica()
-{
-	int total = 0;
-	total = campea.getTotalvetor();
-	Consola::clrscr();
-	Consola::setScreenSize(50, 80);
-	for (int i = 0; i < total; i++)
-	{
-		char id;
-		id = campea.getIDCarro(i);
-		Consola::gotoxy(0, 0);
-		cout << id << endl;
-		//Ainda nao esta acabado
-
-	}
-	return false;
-}
-
 vector<string> Interface::getTokens(string stri)
 {
 	istringstream iss(stri);
@@ -440,15 +453,20 @@ void Interface::addParesCampeonato()
 	int max=0,npares,pos=0;
 	Piloto* pilot;
 	max = campea.EncontraAutodromoComMenorMaxCarros();
-	for (npares = 1; (npares <= max) && (pos<dgva.getTamVetorPilotos()); npares++) 
+	for (npares = 1; (npares <= max) && (pos<dgva.getTamVetorPilotos()); pos++) 
 	{
 		pilot = dgva.getPilotoSegundoPosicaoNoVetor(pos);
 		if (pilot->getCarroPar() != nullptr) 
 		{
 			campea.addParCampeonato(pilot);
+			npares++;
 		}
-		pos++;
 	}
+}
+
+void Interface::criaCopiaDGV(const DGV& copy)
+{
+	
 }
 
 

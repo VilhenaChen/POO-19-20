@@ -14,6 +14,7 @@ class Interface
 	DGV dgva;
 	Autodromos autoa;
 	Campeonato campea;
+	vector<DGV> copias_dgv;
 
 public:
 	Interface() {}
@@ -24,9 +25,9 @@ public:
 
 	//menu campeonato
 	bool menu_campeonato();
-	
-	//interface Grafica
-	bool interface_grafica();
+
+	//menu corrida
+	bool menu_corrida(); //Continua no proximo episodio
 
 	//tokens
 	vector<string> getTokens(string stri);
@@ -38,6 +39,9 @@ public:
 	//choose
 	void addAutodromoCampeonato(string name_aut);
 	void addParesCampeonato();
+
+	//copy
+	void criaCopiaDGV(const DGV& copy);
 
 	virtual ~Interface() {}
 };
