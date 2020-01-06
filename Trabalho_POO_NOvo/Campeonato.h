@@ -49,7 +49,6 @@ public:
 
 	//Driver Personallity
 	//Crazy Driver
-	void Lugar(Par_Campeonato* par);
 	int getUltimo();
 
 	//Charge
@@ -72,6 +71,7 @@ public:
 	//verify
 	bool verificaSeJaTodosAcabaram();
 	bool verificaSeCampeonatoAcabou();
+	void verificaCarrosDestruidos();
 
 	//Points
 	void atribuiPontos();

@@ -10,6 +10,7 @@ class Carro
 	char id_carro;
 	float energia_max, energia_atual;
 	int velocidade_max = 200;
+	bool destruido=false;
 	bool avariado = false;
 	Piloto* piloto_par = nullptr;
 
@@ -25,11 +26,13 @@ public:
 	int getVelocidade_max();
 	bool getAvariado();
 	Piloto* getPilotoPar();
+	bool getDestruido();
 
 	//sets
 	void setPilotoPar(Piloto* pil_par);
 	void setEnergia_atual(float energia);
 	void setAvariado(bool ava);
+	void setDestruido(bool destruiu);
 
 	virtual ~Carro()
 	{

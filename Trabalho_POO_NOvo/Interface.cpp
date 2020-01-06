@@ -1,4 +1,3 @@
-
 #include "Interface.h"
 
 bool Interface::menu_inicial()
@@ -233,6 +232,7 @@ bool Interface::menu_inicial()
 									{
 										name_dgv = vet_var_comando[k];
 										k++;
+										copias_dgv.push_back(new DGV(dgva,name_dgv));
 									}
 									else
 									{
@@ -240,6 +240,7 @@ bool Interface::menu_inicial()
 										{
 											name_dgv = vet_var_comando[k];
 											k++;
+
 										}
 										else
 										{
@@ -247,6 +248,15 @@ bool Interface::menu_inicial()
 											{
 												name_dgv = vet_var_comando[k];
 												k++;
+												for (auto it = copias_dgv.begin(); it < copias_dgv.end(); it++)
+												{
+													if ((*it)->getNome()==name_dgv)
+													{
+														delete* it;
+														copias_dgv.erase(it);
+														break;
+													}
+												}
 											}
 											else
 											{
@@ -284,6 +294,7 @@ bool Interface::menu_campeonato()
 	vector <string> vet_var_comando;
 	string com_completo;
 	string com;
+	bool mp;
 	com.clear();
 	cout << "CAMPEONATO" << endl;
 	cout << "COMANDOS" << endl;
@@ -341,67 +352,116 @@ bool Interface::menu_campeonato()
 				{
 					campea.preparaCorrida();
 					campea.lancaCorrida();
-
+					do
+					{
+						mp = menu_corrida();
+					} while (mp == false);
+					if (campea.verificaSeCampeonatoAcabou() == true) 
+					{
+						campea.setClassificacaoCampeonato();
+						campea.mostraClassificacaoCampeonatoOrganizada();
+						lancaMenuInicial();
+					}
+					dgva.verificaPilotosMortos();
+					dgva.verificaCarrosDestruidos();
+					campea.verificaCarrosDestruidos();
 				}
 				else
 				{
-					if (com == "acidente")
+					if (com == "destroi")
 					{
 						letr_car = vet_var_comando[k];
 						k++;
-						pcarro = campea.getCarro(letr_car[0]);
-						dgva.apagaPiloto(pcarro->getPilotoPar()->getNome());
-						campea.acidente(letr_car[0]);
+						campea.destroi(letr_car[0]);
+						dgva.apagaCarro(letr_car[0]);
 					}
 					else
 					{
-						if (com == "stop")
+						if (com == "log")
 						{
-							nome_piloto = vet_var_comando[k];
-							k++;
-							campea.paraCarro(nome_piloto);
 						}
 						else
 						{
-							if (com == "destroi")
-							{
-								letr_car = vet_var_comando[k];
-								k++;
-								campea.destroi(letr_car[0]);
-								dgva.apagaCarro(letr_car[0]);
-							}
-							else
-							{
-								if (com == "passatempo" && campea.getCorridaDecorrer()==true)
-								{
-									segundos = vet_var_comando[k];
-									k++;
-									campea.passatempo(stoi(segundos));
-									campea.mostraInformacaoCorrridaOrganizada();
-									if (campea.verificaSeJaTodosAcabaram() == true) 
-									{
-										campea.acabaCorrida();
-										if (campea.verificaSeCampeonatoAcabou() == true) 
-										{
-											campea.setClassificacaoCampeonato();
-											campea.mostraClassificacaoCampeonatoOrganizada();
-										}
-									}
-								}
-								else
-								{
-									if (com == "log")
-									{
-
-									}
-									else
-									{
-										cout << "Comando Invalido!!!" << endl;
-									}
-								}
-							}
+							cout << "Comando Invalido!!!" << endl;
 						}
 					}
+				}
+			}
+		}
+	}
+	return true;
+}
+
+bool Interface::menu_corrida()
+{
+	string com_completo;
+	string segundos;
+	string letr_car;
+	Carro* pcarro;
+	vector<string> vet_var_comando;
+	string com;
+	string nome_piloto;
+	com_completo.clear();
+	segundos.clear();
+	letr_car.clear();
+	com.clear();
+	com.clear();
+	nome_piloto.clear();
+	campea.mostraInformacaoCorrridaOrganizada();
+	cout << "passastempo <n> || acidente <letraCarro> || destroi <letraCarro> || stop <nomePiloto>" << endl;
+	cout << "Insira um comando: ";
+	getline(cin, com_completo);
+	vet_var_comando.clear();
+	vet_var_comando = getTokens(com_completo);
+	unsigned int k = 0;
+	com = vet_var_comando[k];
+	k++;
+	if (com == "passatempo")
+	{
+		segundos = vet_var_comando[k];
+		campea.passatempo(stoi(segundos));
+		if (campea.verificaSeJaTodosAcabaram() == true) 
+		{
+			campea.acabaCorrida();
+			return true;
+		}
+		return false;
+	}
+	else
+	{
+		if (com == "acidente")
+		{
+			letr_car = vet_var_comando[k];
+			k++;
+			pcarro = campea.getCarro(letr_car[0]);
+			dgva.apagaPiloto(pcarro->getPilotoPar()->getNome());
+			campea.acidente(letr_car[0]);
+			campea.destroi(letr_car[0]);
+			return false;
+		}
+		else
+		{
+			if (com == "stop")
+			{
+				nome_piloto = vet_var_comando[k];
+				k++;
+				campea.paraCarro(nome_piloto);
+				return false;
+			}
+			else
+			{
+				if (com == "destroi")
+				{
+					letr_car = vet_var_comando[k];
+					k++;
+					campea.destroi(letr_car[0]);
+					dgva.apagaCarro(letr_car[0]);
+					return false;
+				}
+				else
+				{
+					cout << "[ERRO] Comando Invalido!!" << endl;
+					return false;
 				}
 			}
 		}
@@ -464,10 +524,6 @@ void Interface::addParesCampeonato()
 	}
 }
 
-void Interface::criaCopiaDGV(const DGV& copy)
-{
-	
-}
 
 
 

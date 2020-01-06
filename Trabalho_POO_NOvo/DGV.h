@@ -10,12 +10,13 @@ using namespace std;
 
 class DGV
 {
+	string nome = "principal";
 	vector <Carro*> vetor_carros;
 	vector <Piloto*> vetor_pilotos;
 
 public:
 	DGV() {}
-	DGV(const DGV& copy);
+	DGV(const DGV& copy, string name);
 	//add
 	void addCarro(float ener_atual, float ener_max, string brand, string model="Modelo Base");
 	void addPiloto(string nome, string personalidade);
@@ -31,6 +32,7 @@ public:
 	Carro* getCarroSegundoPosicaoNoVetor(int posi);
 	size_t getTamVetorPilotos();
 	size_t getTamVetorCarros();
+	string getNome();
 
 	//read from file
 	bool leFicheiroCarros(string nome_ficheiro);
@@ -41,19 +43,29 @@ public:
 
 	//get out of the car
 	void saiDoCarro(char let_car);
+
 	//erase
 	void apagaCarro(char let_car);
 	void apagaPiloto(string name_pil);
+
+	//verify
+	void verificaPilotosMortos();
+	void verificaCarrosDestruidos();
 
 	string getAsString();
 
 	virtual ~DGV() 
 	{
-		for (auto it=vetor_carros.begin(); it < vetor_carros.end(); it++)
-			vetor_carros.erase((*it));
-			delete vetor_carros[i];
-		for (int j = 0; j < vetor_pilotos.size(); j++)
-			delete vetor_pilotos[j];
+		for (auto it = vetor_carros.begin(); it < vetor_carros.end(); it++)
+		{
+			delete* it;
+			vetor_carros.erase(it);
+		}
+		for (auto it=vetor_pilotos.begin(); it < vetor_pilotos.end(); it++)
+		{
+			delete* it;
+			vetor_pilotos.erase(it);
+		}
 	}
 };
 

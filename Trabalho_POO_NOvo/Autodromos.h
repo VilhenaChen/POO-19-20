@@ -30,8 +30,11 @@ public:
 
 	virtual ~Autodromos() 
 	{
-		for (int i = 0; i < vetor_autodromos.size(); i++)
-			delete vetor_autodromos[i];
+		for (auto it = vetor_autodromos.begin(); it < vetor_autodromos.end(); it++)
+		{
+			delete* it;
+			vetor_autodromos.erase(it);
+		}
 	}
 };
 

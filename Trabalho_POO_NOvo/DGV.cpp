@@ -3,9 +3,10 @@
 #include <string>
 
 
-DGV::DGV(const DGV& copy)
+DGV::DGV(const DGV& copy, string name)
 {
-	for (auto it = copy.vetor_carros.begin(); it<copy.vetor_carros.end();it++) 
+	nome = name;
+	for (auto it = copy.vetor_carros.begin(); it < copy.vetor_carros.end();it++) 
 	{
 		vetor_carros.push_back(new Carro((*it)->getId_carro(), (*it)->getEnergia_atual(), (*it)->getEnergia_max(), (*it)->getMarca(),(*it)->getModelo()));
 	}
@@ -17,6 +18,7 @@ DGV::DGV(const DGV& copy)
 	{
 		for (auto it = vetor_carros.begin(); it < copy.vetor_carros.end(); it++)
 		{
+			(*it)->setAvariado((*it)->getAvariado());
 			if ((*it)->getId_carro() == (*itc)->getId_carro()) 
 			{
 				for (auto itpc = vetor_pilotos.begin(); itpc < vetor_pilotos.end(); itpc++)
@@ -112,6 +114,11 @@ size_t DGV::getTamVetorCarros()
 {
 	size_t tam = vetor_pilotos.size();
 	return tam;
+}
+
+string DGV::getNome()
+{
+	return nome;
 }
 
 
@@ -289,6 +296,29 @@ void DGV::apagaPiloto(string name_pil)
 	}
 	cout << "O piloto " << name_pil << " não existe" << endl;
 }
+
+void DGV::verificaPilotosMortos()
+{
+	for (auto it = vetor_pilotos.begin(); it < vetor_pilotos.end(); it++) 
+	{
+		if ((*it)->getMorto() == true) 
+		{
+			apagaPiloto((*it)->getNome());
+		}
+	}
+}
+
+void DGV::verificaCarrosDestruidos()
+{
+	for (auto it = vetor_carros.begin(); it < vetor_carros.end(); it++)
+	{
+		if ((*it)->getDestruido() == true)
+		{
+			apagaCarro((*it)->getId_carro());
+		}
+	}
+}
+
 
 string DGV::getAsString()
 {

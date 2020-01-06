@@ -51,6 +51,11 @@ Piloto* Carro::getPilotoPar()
 	return piloto_par;
 }
 
+bool Carro::getDestruido()
+{
+	return destruido;
+}
+
 void Carro::setPilotoPar(Piloto* pil_par)
 {
 	piloto_par = pil_par;
@@ -64,4 +69,9 @@ void Carro::setEnergia_atual(float energia)
 void Carro::setAvariado(bool ava)
 {
 	avariado = ava;
+}
+
+void Carro::setDestruido(bool destruiu)
+{
+	destruido = destruiu;
 }

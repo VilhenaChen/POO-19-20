@@ -9,6 +9,7 @@ class Piloto
 	string nome;
 	string personalidade;
 	string pers_temp;
+	bool morto = false;
 	Carro* carro_par = nullptr;
 
 public:
@@ -19,11 +20,13 @@ public:
 	string getNome();
 	string getPersonalidade();
 	string getPersonalidadeTemporaria();
+	bool getMorto();
 	Carro* getCarroPar();
 
 	//sets
 	void setCarroPar(Carro* car_par);
 	void setPersonalidadeTemporaria(string person);
+	void setmorto(bool estado);
 
 	virtual ~Piloto() 
 	{
